@@ -16,3 +16,9 @@ h1, h2, h3 {
 p {
   @apply leading-relaxed;
 }
+
+@layer components {
+  .card-lift {
+    @apply border border-[oklch(0.86_0.030_78)]/70 hover:border-[oklch(0.72_0.150_80)] hover:-translate-y-1 transition-all duration-300;
+  }
+}
