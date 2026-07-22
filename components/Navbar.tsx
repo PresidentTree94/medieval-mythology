@@ -1,6 +1,5 @@
 import Link from "next/link";
-
-const navs = ["Characters", "Kingdoms", "Pantheon", "Myths"];
+import { navs } from "@/data/navData";
 
 export default function Navbar() {
   return (
@@ -19,8 +18,8 @@ export default function Navbar() {
           {/*Mobile*/}
         </div>
         <nav className="flex gap-1 text-sm uppercase tracking-widest">
-          {navs.map((n, index) => (
-            <Link key={index} href={`/${n.toLowerCase()}`} className="px-4 py-2 text-[oklch(0.96_0.018_82)]">{n}</Link>
+          {Object.entries(navs).map(([key, n]) => (
+            <Link key={key} href={`/${n.title.toLowerCase()}`} className="px-4 py-2 text-[oklch(0.96_0.018_82)]">{n.title}</Link>
           ))}
         </nav>
         <Link href="/archive" className="px-5 py-2.5 rounded-md bg-[oklch(0.50_0.170_25)] text-[oklch(0.98_0.012_85)] text-xs tracking-widest uppercase">Enter the Archive</Link>
