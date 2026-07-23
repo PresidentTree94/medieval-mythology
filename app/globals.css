@@ -1,12 +1,26 @@
 @import "tailwindcss";
 
 @theme inline {
+  --color-background-dark: oklch(0.92 0.024 80); /*background-200*/
+  --color-background-light: oklch(0.96 0.018 82); /*background-100*/
+  --color-foreground-dark: oklch(0.08 0.010 25); /*foreground-950*/
+  --color-foreground-light: oklch(0.24 0.022 30); /*foreground-700*/
+  --color-card: oklch(0.98 0.012 85); /*background-50*/
+  --color-border: oklch(0.86 0.030 78); /*background-300*/
   --font-display: var(--font-cinzel);
   --font-body: var(--font-cormorant-garamond);
 }
 
 body {
   font-family: var(--font-body);
+}
+
+section:not(:has(> img)) {
+  @apply py-24 md:py-32;
+}
+
+section:not(:has(> img)) > div {
+  @apply max-w-7xl mx-auto px-6 lg:px-10;
 }
 
 h1, h2, h3 {
@@ -18,7 +32,11 @@ p {
 }
 
 @layer components {
-  .card-lift {
-    @apply border border-[oklch(0.86_0.030_78)]/70 hover:border-[oklch(0.72_0.150_80)] hover:-translate-y-1 transition-all duration-300;
+  .gilded {
+    @apply bg-clip-text text-transparent bg-gradient-to-b from-[oklch(0.84_0.115_84)] via-[oklch(0.62_0.140_78)] to-[oklch(0.40_0.100_72)];
+  }
+
+  .card {
+    @apply bg-card rounded-lg border border-border/70 hover:border-[oklch(0.72_0.150_80)] hover:-translate-y-1 transition-all duration-300;
   }
 }

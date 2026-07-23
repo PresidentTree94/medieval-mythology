@@ -1,4 +1,4 @@
-type NavType = {
+export type NavType = {
   title: string;
   icon: string;
   tagline: string;
