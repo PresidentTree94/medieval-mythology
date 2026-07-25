@@ -13,7 +13,6 @@
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-background-dark);
 }
 
 main {
@@ -24,7 +23,7 @@ section:not(:has(> img)), article {
   @apply py-24 md:py-32;
 }
 
-section:not(:has(> img)) > div, article > div {
+section:not(:has(> img)) > div {
   @apply max-w-7xl mx-auto px-6 lg:px-10;
 }
 
@@ -46,6 +45,18 @@ h1, h2, h3 {
 
 p {
   @apply leading-relaxed;
+}
+
+form {
+  @apply p-6 space-y-5;
+}
+
+label {
+  @apply text-xs font-display text-foreground-light uppercase tracking-widest block;
+}
+
+input, select {
+  @apply px-3 py-2.5 w-full rounded-md border border-border text-sm text-foreground-dark outline-none;
 }
 
 .gilded {

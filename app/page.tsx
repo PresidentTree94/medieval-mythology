@@ -7,6 +7,13 @@ import CenterSection from "@/components/CenterSection";
 import LeftSection from "@/components/LeftSection";
 import InfoBlock from "@/components/InfoBlock";
 
+const navTaglines: Record<string, string> = {
+  characters: "Monarchs, mages, and outlaws.",
+  kingdoms: "Nine realms beneath the cracked sky.",
+  pantheon: "The Radiant Twelve and the Chthonic Court.",
+  myths: "Recorded legends of the ages."
+};
+
 export default function Home() {
   return (
     <main>
@@ -34,7 +41,7 @@ export default function Home() {
                 <span className="font-display text-xs tracking-widest uppercase text-[oklch(0.50_0.120_76)]">0 Entries</span>
               </div>
               <h3 className="text-2xl text-foreground-dark">{n.title}</h3>
-              <p className="text-sm font-display tracking-widest uppercase text-[oklch(0.34_0.140_25)]">{n.tagline}</p>
+              <p className="text-sm font-display tracking-widest uppercase text-[oklch(0.34_0.140_25)]">{navTaglines[key]}</p>
               <p className="flex-1 text-foreground-light">{n.description}</p>
               <span className="font-display text-sm tracking-widest uppercase text-[oklch(0.50_0.120_76)] inline-flex items-center gap-2 group-hover:text-[oklch(0.34_0.140_25)] transition-colors duration-300">Consult<i className="ri-arrow-right-line"></i></span>
             </Link>

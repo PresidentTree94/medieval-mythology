@@ -1,0 +1,165 @@
+id,name,markers,location,meaning,tagline,timestamp
+1,Priam,[],"Troy, Troad","""very courageous""","King of Troy | fathered Cassandra, Creusa, Deiphobus, Hector, Helenus, Ilione, Laodice, Paris, Polyxena, and Troilus with Hecuba; brother of Astyoche (Troy) and Tithonus",2026-03-19 19:08:32.115927+00
+2,Agamemnon,[],"Mycenae, Argolis","""very steadfast""","King of Mycenae | fathered Chrysothemis, Electra, Iphigenia and Orestes with Clytemnestra; brother of Anaxibia and Menelaus",2026-03-19 19:08:32.115927+00
+3,Menelaus,[],"Mycenae, Argolis","""strength of the people""",King of Sparta | fathered Hermione with Helen; brother of Agamemnon and Anaxibia,2026-03-19 19:08:32.115927+00
+4,Cassandra,"[""Seer"",""Prophet""]","Troy, Troad","""excel, shine""","Princess of Troy | daughter of Priam and Hecuba; sister of Creusa, Deiphobus, Hector, Helenus, Ilione, Laodice, Paris, Polyxena, and Troilus",2026-03-19 19:08:32.115927+00
+5,Hector,[],"Troy, Troad","""hold, steadfast""","Prince of Troy | fathered Astyanax with Andromache; son of Priam and Hecuba; brother of Cassandra, Creusa, Deiphobus, Helenus, Ilione, Laodice, Paris, Polyxena, and Troilus",2026-03-19 19:08:32.115927+00
+6,Odysseus,[],"Ithaca, Ionian Islands","""troubled, wrathful""",King of Ithaca | fathered Telemachus with Penelope; son of Anticlea and Laertes; brother of Ctimene,2026-03-19 19:08:32.115927+00
+7,Paris,[],"Troy, Troad","""defending men""","Prince of Troy | son of Priam and Hecuba; brother of Cassandra, Creusa, Deiphobus, Hector, Helenus, Ilione, Laodice, Paris, Polites, Polydorus, Polyxena, and Troilus; half-brother of Aesacus, Gorgythion, and Lycaon",2026-03-19 19:08:32.115927+00
+8,Anaxibia,[],"Mycenae, Argolis","""queenly one""",Queen of Crisa | mothered Pylades with Strophius; sister of Agamemnon and Menelaus,2026-03-19 19:08:32.115927+00
+9,Iphigenia,"[""Prophet""]","Mycenae, Argolis","""strong""","Princess of Mycenae | daughter of Agamemnon and Clytemnestra; sister of Chrysothemis, Electra, and Orestes",2026-03-19 19:08:32.115927+00
+10,Electra,[],"Mycenae, Argolis","""amber""","Princess of Mycenae | daughter of Agamemnon and Clytemnestra; sister of Chrysothemis, Iphigenia, and Orestes",2026-03-19 19:08:32.115927+00
+11,Orestes,[],"Mycenae, Argolis","""mountain dweller""","Prince of Mycenae | son of Agamemnon and Clytemnestra; brother of Chrysothemis, Electra, and Iphigenia",2026-03-19 19:08:32.115927+00
+12,Aegisthus,[],"Mycenae, Argolis","""goat""",Noble of Mycenae | son of Thyestes and Pelopia,2026-03-19 19:08:32.115927+00
+13,Chrysothemis,[],"Mycenae, Argolis","""golden law""","Princess of Mycenae | daughter of Agamemnon and Clytemnestra; sister of Electra, Iphigenia, and Orestes",2026-03-19 19:08:32.115927+00
+14,Deiphobus,[],"Troy, Troad","""fearsome""","Prince of Troy | son of Priam and Hecuba; brother of Cassandra, Creusa, Hector, Helenus, Ilione, Laodice, Paris, Polyxena, and Troilus",2026-03-19 19:08:32.115927+00
+15,Acamas,[],"Athens, Attica","""unyielding, unending""",Prince of Athens | son of Theseus and Phaedra; brother of Demophon; half-brother of Hippolytus,2026-03-19 19:08:32.115927+00
+16,Demophon,[],"Athens, Attica","""voice of the people""",Prince of Athens | son of Theseus and Phaedra; brother of Acamas; half-brother of Hippolytus,2026-03-19 19:08:32.115927+00
+17,Aethra,[],"Troezen, Attica","""bright sky""",Queen of Troezen | mothered Theseus with Aegeus,2026-03-19 19:08:32.115927+00
+18,Theseus,[],"Troezen, Attica","""to place, to establish""","King of Athens | fathered Acamas and Demophon with Phaedra, and Hippolytus with Hippolyta; son of Aethra",2026-03-19 19:08:32.115927+00
+19,Hecuba,[],"Western Thrace, Thrace","""???""","Queen of Troy | mothered Cassandra, Creusa, Deiphobus, Hector, Helenus, Ilione, Laodice, Paris, Polyxena, and Troilus with Priam; sister of Theano",2026-03-19 19:08:32.115927+00
+20,Helen,"[""Demigod""]","Sparta, Laconia","""torch, moon""",Queen of Sparta | mothered Hermione with Menelaus; daughter of Leda and Zeus; sister of Pollux; half-sister of Castor and Clytemnestra,2026-03-19 19:08:32.115927+00
+21,Penelope,[],"Sparta, Laconia","""threads""",Queen of Ithaca | mothered Telemachus with Odysseus; daughter of Icarius and Periboea (Sparta); sister of Iphthime,2026-03-19 19:08:32.115927+00
+22,Harpalyce,[],"Amymnaia, Thrace","""plundering light""",Princess of Amymnaia | daughter of Harpalycus,2026-03-19 19:08:32.115927+00
+23,Achilles,"[""Demigod""]","Phthia, Thessaly","""pain, grief""",Prince of Phthia | fathered Neoptolemus with Deidamia; son of Peleus and Thetis,2026-03-19 19:08:32.115927+00
+24,Clytemnestra,[],"Sparta, Laconia","""noble schemer""","Queen of Mycenae | mothered Chrysothemis, Electra, Iphigenia, and Orestes with Agamemnon; daughter of Leda and Tyndareus; sister of Castor; half-sister of Helen and Pollux",2026-03-19 19:08:32.115927+00
+28,Machaon,"[""Demigod""]","Tricca, Thessaly (Central Greece)",,Noble of Tricca | son of Asclepius; brother of Podalirius,2026-03-19 19:08:32.115927+00
+30,Diomedes,[],"Argos, Argolis",,King of Argos | husband of Aegiale; son of Deipyle and Tydeus,2026-03-19 19:08:32.115927+00
+31,Ajax the Lesser,[],"Naryx, Locris",,Prince of Locris | son of Oileus and Eriopis; half-brother of Medon,2026-03-19 19:08:32.115927+00
+32,Sthenelus,[],"Argos, Argolis",,Charioteer of Argos | fathered Cometes,2026-03-19 19:08:32.115927+00
+33,Aeneas,"[""Demigod""]","Dardania, Troad",,Prince of Troy | fathered Ascanius with Creusa; son of Anchises and Aphrodite,2026-03-19 19:08:32.115927+00
+34,Glaucus,[],"Xanthos, Lycia",,Noble of Xanthos | son of Hippolochus,2026-03-19 19:08:32.115927+00
+37,Atalanta,[],"Mount Parthenion, Arcadia",,Princess of Arcadia | daughter of Clymene and Iasus,2026-03-19 19:08:32.115927+00
+38,Meleager,[],"Calydon, Aetolia",,Prince of Calydon | son of Althaea and Oeneus,2026-03-19 19:08:32.115927+00
+40,Telamon,[],"Aegina, Attica",,King of Salamis | fathered Ajax the Great with Periboea and Teucer with Hesione; brother of Peleus,2026-03-19 19:08:32.115927+00
+41,Pirithous,[],"Larissa, Thessaly","""to run around""",King of the Lapiths | fathered Polypoetes with Hippodamia; son of Ixion and Dia,2026-03-19 19:08:32.115927+00
+42,Phoenix,[],"Ormenium, Thessaly",,King of the Dolopians | son of Amyntor and Cleobule; brother of Crantor,2026-03-19 19:08:32.115927+00
+43,Peleus,[],"Aegina, Attica",,King of Phthia | fathered Achilles with Thetis; brother of Telamon,2026-03-19 19:08:32.115927+00
+44,Laertes,[],"Ithaca, Ionian Islands","""people gatherer""",King of Ithaca | fathered Odysseus with Anticlea,2026-03-19 19:08:32.115927+00
+45,Eurytion,[],"Phthia, Thessaly",,King of Phthia | son of Demonassa and Irus,2026-03-19 19:08:32.115927+00
+46,Castor,[],"Sparta, Laconia","""to shine""",Prince of Sparta | son of Leda and Tyndareus; brother of Clytemnestra; half-brother of Helen and Pollux,2026-03-19 19:08:32.115927+00
+47,Pollux,"[""Demigod""]","Sparta, Laconia","""sweet, loved""",Prince of Sparta | son of Leda and Zeus; brother of Helen; half-brother of Castor and Clytemnestra,2026-03-19 19:08:32.115927+00
+48,Alcon,[],"Amyclae, Laconia","""strength, courage""",Prince of Sparta | son of Hippocoön; brother of Leucippus,2026-03-19 19:08:32.115927+00
+49,Leucippus,[],"Amyclae, Laconia","""shining horse""",Prince of Sparta | son of Hippocoön; brother of Alcon,2026-03-19 19:08:32.115927+00
+50,Althaea,[],"Pleuron, Aetolia",,"Queen of Calydon | mothered Meleager with Oeneus; daughter of Eurythemis and Thestius; sister of Leda, Plexippus, and Toxeus",2026-03-19 19:08:32.115927+00
+51,Oeneus,[],"Calydon, Aetolia",,King of Calydon | fathered Meleager with Althaea,2026-03-19 19:08:32.115927+00
+52,Plexippus,[],"Pleuron, Aetolia",,"Noble of Pleuron | son of Eurythemis and Thestius; brother of Althaea, Leda, and Toxeus",2026-03-19 19:08:32.115927+00
+53,Toxeus,[],"Pleuron, Aetolia",,"Noble of Pleuron | son of Eurythemis and Thestius; brother of Althaea, Leda, and Plexippus",2026-03-19 19:08:32.115927+00
+54,Ajax the Great,[],"Salamis, Attica",,Prince of Salamis | son of Periboea (Salamis) and Telamon; half-brother of Teucer,2026-03-19 19:08:32.115927+00
+57,Teucer,[],"Salamis, Attica",,Prince of Salamis | son of Telamon and Hesione; half-brother of Ajax the Great,2026-03-19 19:08:32.115927+00
+60,Antilochus,[],"Pylos, Messenia",,"Prince of Pylos | son of Eurydice and Nestor; brother of Peisistratus, Polycaste, and Thrasymedes",2026-03-19 19:08:32.115927+00
+63,Polypoetes,[],"Larissa, Thessaly","""maker of many""",Prince of Thessaly | son of Hippodamia and Pirithous,2026-03-19 19:08:32.115927+00
+64,Idomeneus,[],"Knossos, Crete",,King of Crete | son of Deucalion and Cleopatra,2026-03-19 19:08:32.115927+00
+65,Automedon,[],"Skyros, Euboea",,Charioteer of Skyros,2026-03-19 19:08:32.115927+00
+66,Thrasymedes,[],"Pylos, Messenia",,"Prince of Pylos | son of Eurydice and Nestor; brother of Antilochus, Peisistratus, and Polycaste",2026-03-19 19:08:32.115927+00
+70,Briseis,[],"Lyrnessus, Troad",,Noble of Lyrnessus,2026-03-19 19:08:32.115927+00
+71,Andromache,[],"Thebe, Troad",,Princess of Thebe | mothered Astyanax with Hector,2026-03-19 19:08:32.115927+00
+96,Artemis,"[""Deity""]",Mount Olympus,,"deity of hunting and chastity | daughter of Zeus and Leto; sister of Apollo; half-sister of Ares, Aphrodite, Athena, Hephaestus, Heracles, Hermes, and Sarpedon",2026-03-19 19:08:32.115927+00
+99,Menestheus,[],"Athens, Attica",,King of Athens,2026-03-19 19:08:32.115927+00
+197,Agenor,[],"Troy, Troad",,"Noble of Troy | son of Antenor and Theano; brother of Archelochus, Coön, and Iphidamas",2026-03-19 19:08:32.115927+00
+201,Antenor,[],"Dardania, Troad",,"Elder of Troy | fathered Agenor, Archelochus, Coön, and Iphidamas with Theano",2026-03-19 19:08:32.115927+00
+203,Aphrodite,"[""Deity""]",Mount Olympus,,"deity of love and beauty | mothered Aeneas with Anchises; daughter of Zeus and Dione; half-sister of Ares, Apollo, Artemis, Athena, Hephaestus, Heracles, Hermes, and Sarpedon",2026-03-19 19:08:32.115927+00
+204,Apollo,"[""Deity""]",Mount Olympus,,"deity of healing and prophecy | son of Zeus and Leto; brother of Artemis; half-brother of Aphrodite, Athena, Hephaestus, Helen, Heracles, Hermes, Pollux, and Sarpedon",2026-03-19 19:08:32.115927+00
+205,Ares,"[""Deity""]",Mount Olympus,"""man of ruin""","deity of war and courage | fathered Penthesilea and Hippolyta with Otrera, and Tereus and Dryas with Bistonis; son of Zeus and Hera; brother of Hephaestus; half-brother of Aphrodite, Apollo, Artemis, Athena, Heracles, Hermes, and Sarpedon",2026-03-19 19:08:32.115927+00
+207,Asius,[],"Arisbe, Troad",,Noble of Arisbe | son of Arisbe and Hyrtacus,2026-03-19 19:08:32.115927+00
+208,Athena,"[""Deity""]",Mount Olympus,,"deity of strategy and wisdom | daughter of Zeus and Metis; half-sister of Aphrodite, Apollo, Artemis, Ares, Hephaestus, Heracles, Hermes, and Sarpedon",2026-03-19 19:08:32.115927+00
+211,Calchas,"[""Seer"",""Prophet""]","Argos, Argolis",,"Mantis of Argos | son of Polymele and Thestor; brother of Leucippus, Theoclymenus, and Theonoe",2026-03-19 19:08:32.115927+00
+214,Coön,[],"Troy, Troad",,"Noble of Troy | son of Antenor and Theano; brother of Agenor, Archelochus, and Iphidamas",2026-03-19 19:08:32.115927+00
+217,Dolon,[],"Troy, Troad",,Noble of Troy | son of Eumedes,2026-03-19 19:08:32.115927+00
+218,Elephenor,[],"Chalcis, Euboea",,King of the Abantes,2026-03-19 19:08:32.115927+00
+223,Helenus,"[""Seer""]","Troy, Troad",,"Prince of Troy | son of Priam and Hecuba; brother of Cassandra, Creusa, Deiphobus, Hector, Ilione, Laodice, Paris, Polyxena, and Troilus",2026-03-19 19:08:32.115927+00
+224,Hephaestus,"[""Deity""]",Mount Olympus,,"deity of artisans and fire | son of Zeus and Hera; brother of Ares; half-brother of Aphrodite, Apollo, Artemis, Athena, Heracles, Hermes, and Sarpedon",2026-03-19 19:08:32.115927+00
+225,Hera,"[""Deity""]",Mount Olympus,,deity of marriage and women | mothered Ares and Hephaestus with Zeus,2026-03-19 19:08:32.115927+00
+230,Meriones,[],"Knossos, Crete",,Noble of Crete | son of Euippe and Molus,2026-03-19 19:08:32.115927+00
+231,Nestor,[],"Pylos, Messenia",,"King of Pylos | fathered Antilochus, Peisistratus, Polycaste, and Thrasymedes with Eurydice",2026-03-19 19:08:32.115927+00
+233,Pandarus,[],"Zeleia, Troad",,Noble of Zeleia,2026-03-19 19:08:32.115927+00
+235,Patroclus,[],"Opus, Locris",,Noble of Opus,2026-03-19 19:08:32.115927+00
+237,Polydamas,[],"Troy, Troad",,Noble of Troy | son of Panthous and Phrontis,2026-03-19 19:08:32.115927+00
+239,Poseidon,"[""Deity""]",Mount Olympus,,deity of oceans and horses | brother of Hades and Zeus,2026-03-19 19:08:32.115927+00
+241,Sarpedon,"[""Demigod""]","Knossos, Crete",,"King of Lycia | son of Zeus and Laodamia or Europa; half-brother of Aphrodite, Apollo, Artemis, Ares, Athena, Hephaestus, and Heracles",2026-03-19 19:08:32.115927+00
+243,Thetis,"[""Nymph""]",Aegean Sea,"""to place, to establish""","Queen of Phthia | mothered Achilles with Peleus; sister of Cymothoe, Dynamene, and Pherusa",2026-03-19 19:08:32.115927+00
+244,Tlepolemus,"[""Demigod""]","Ephyra, Thesprotia",,Prince of Ephyra | son of Hercules and Astyoche (Ephyra),2026-03-19 19:08:32.115927+00
+245,Zeus,"[""Deity""]",Mount Olympus,,"deity of thunder and skies | fathered Ares and Hephaestus with Hera, Aphrodite with Dione, Apollo and Artemis with Leto, Athena with Metis, Helen and Pollux with Leda, Heracles with Alcmene, Hermes with Maia, and Sarpedon with Europa; brother of Demeter, Hades, Hera, and Poseidon",2026-03-19 19:08:32.115927+00
+246,Laodice,[],"Troy, Troad","""justice of the people""",,2026-03-19 19:08:32.115927+00
+247,Ilione,[],"Bistonia, Thrace","""of Troy""",,2026-03-19 19:08:32.115927+00
+248,Troilus,[],"Troy, Troad","""of Troy""",,2026-03-19 19:08:32.115927+00
+249,Iphidamas,[],"Troy, Troad",,"Noble of Troy | son of Antenor and Theano; brother of Agenor, Archelochus, and Coön",2026-03-19 19:08:32.115927+00
+250,Medon (Locris),[],"Naryx, Locris",,Noble of Locris | son of Oileus and Rhene; half-brother of Ajax the Lesser,2026-03-19 19:08:32.115927+00
+252,Archelochus,[],"Troy, Troad",,"Noble of Troy | son of Antenor and Theano; brother of  Agenor, Coön, and Iphidamas",2026-03-19 19:08:32.115927+00
+253,Polymestor,[],"Bistonia, Thrace","""man of many plans""",,2026-03-19 19:08:32.115927+00
+255,Penthesilea,"[""Demigod""]",Themiscyra,,Princess of the Amazons | daughter of Ares and Otrera; sister of Hippolyta; half-sister of Tereus and Dryas,2026-03-19 19:08:32.115927+00
+257,Memnon,"[""Demigod""]",Aethiopia,,King of Aethiopia | son of Eos and Tithonus,2026-03-19 19:08:32.115927+00
+264,Cymothoe,"[""Nymph""]",Aegean Sea,"""wave swift""","sister of Dynamene, Pherusa, and Thetis",2026-03-19 19:08:32.115927+00
+265,Dynamene,"[""Nymph""]",Aegean Sea,"""power bringer""","sister of Cymothoe, Pherusa, and Thetis",2026-03-19 19:08:32.115927+00
+266,Pherusa,"[""Nymph""]",Aegean Sea,"""to bring, to carry""","sister of Cymothoe, Dynamene, and Thetis",2026-03-19 19:08:32.115927+00
+276,Philoctetes,[],"Meliboea, Thessaly",,Prince of Meliboea | son of Demonassa and Poeas,2026-03-19 19:08:32.115927+00
+278,Neoptolemus,[],"Skyros, Euboea",,Prince of Skyros | son of Achilles and Deidamia,2026-03-19 19:08:32.115927+00
+279,Eurypylus,[],,,Prince of Mysia | son of Astyoche (Troy) and Telephus,2026-03-19 19:08:32.115927+00
+281,Epeius,[],"Panopeus, Phocis",,Soldier of Panopeus | son of Asterodia and Phocus,2026-03-19 19:08:32.115927+00
+282,Eumelus,[],"Pherae, Thessaly","""rich in sheep""",King of Pherae | husband of Iphthime; son of Admetus and Alcestis,2026-03-19 19:08:32.115927+00
+297,Laocoön,"[""Seer"",""Prophet""]","Troy, Troad",,Priest of Troy | son of Acoetes,2026-03-19 19:08:32.115927+00
+298,Sinon,[],"Parnassus, Phocis",,Soldier of Parnassus | son of Aesimus,2026-03-19 19:08:32.115927+00
+303,Astyoche (Troy),[],"Troy, Troad",,Queen of Mysia | mothered Eurypylus with Telephus; sister of Priam and Tithonus,2026-03-19 19:08:32.115927+00
+311,Coroebus,[],"Phrygia, Anatolia",,Prince of Phrygia | son of Anaximene and Mygdon,2026-03-19 19:08:32.115927+00
+315,Polyxena,[],"Troy, Troad",,,2026-03-19 19:08:32.115927+00
+325,Pylades,[],"Crisa, Phocis","""gate, door""",Prince of Crisa | son of Anaxibia and Strophius,2026-03-19 19:08:32.115927+00
+331,Strophius,[],"Crisa, Phocis","""twisted, slippery""",King of Crisa | fathered Pylades with Anaxibia,2026-03-19 19:08:32.115927+00
+339,Hades,"[""Deity""]",Mount Olympus,,deity of the dead and riches | brother of Poseidon and Zeus,2026-03-19 19:08:32.115927+00
+340,Lycomedes,[],"Skyros, Euboea",,King of Skyros | father of Deidamia,2026-03-19 19:08:32.115927+00
+342,Iphthime,[],"Sparta, Laconia","""stalwart""",Queen of Pherae |  daughter of Icarius and Periboea (Sparta); sister of Penelope,2026-03-19 19:08:32.115927+00
+350,Oenone,"[""Nymph"",""Prophet""]","Mount Ida, Troad","""wine""",,2026-03-19 19:08:32.115927+00
+355,Theano,[],"Western Thrace, Thrace","""goddess""",,2026-03-19 19:08:32.115927+00
+356,Hesperia,"[""Nymph""]","Mount Ida, Troad","""evening (star)""",,2026-03-19 19:08:32.115927+00
+358,Ctimene,[],"Ithaca, Ionian Islands","""to aquire, to own""",,2026-03-19 19:08:32.115927+00
+359,Telemachus,[],"Ithaca, Ionian Islands","""fighting from afar""",Prince of Ithaca | son of Odysseus and Penelope,2026-03-19 19:08:32.115927+00
+360,Eurylochus,[],"Same, Ionian Islands","""far-reaching ambush""",Noble of Same | husband of Ctimene,2026-03-19 19:08:32.115927+00
+361,Tyndareus,[],"Sparta, Laconia","""to strike, to push""",King of Sparta | fathered Helen and Castor with Leda; brother of Icarius; half-brother of Hippocoön,2026-03-19 19:08:32.115927+00
+362,Icarius,[],"Sparta, Laconia","""???""",King of Sparta | fathered Iphthime and Penelope with Periboea (Sparta); brother of Tyndareus; half-brother of Hippocoön,2026-03-19 19:08:32.115927+00
+363,Hippocoön,[],"Sparta, Laconia","""master of horses""",King of Sparta | fathered Alcon and Leucippus; half-brother of Icarius and Tyndareus,2026-03-19 19:08:32.115927+00
+364,Hermione,[],"Sparta, Laconia","""pile of stones""",,2026-03-19 19:08:32.115927+00
+365,Periboea (Sparta),"[""Nymph""]","Sparta, Laconia","""around cattle""",,2026-03-19 19:08:32.115927+00
+368,Harpalycus,[],"Amymnaia, Thrace","""plundering wolf""",,2026-03-19 19:08:32.115927+00
+371,Anticlea,[],"Mount Parnassus, Phocis","""without fame""",,2026-03-19 19:08:32.115927+00
+372,Cebren,"[""Deity""]","Mount Ida, Troad",,,2026-03-19 19:08:32.115927+00
+373,Autolycus,"[""Demigod""]","Mount Parnassus, Phocis","""self-wolf""",Thief of Parnassus | fathered Anticlea with Amphithea; son of Chione and Hermes,2026-03-19 19:08:32.115927+00
+374,Amphithea,[],,,,2026-03-19 19:08:32.115927+00
+378,Bistonis,"[""Nymph""]","Bistonia, Thrace","""???""",,2026-03-19 19:08:32.115927+00
+379,Tereus,"[""Demigod""]",Thrace,"""to guard, to pierce""",King of Thrace | fathered Itys with Procne; son of Ares and Bistonis; brother of Dryas; half-brother of Penthesilea and Hippolyta,2026-03-19 19:08:32.115927+00
+380,Dryas,[],Thrace,"""oak""",Prince of Thrace / son of Ares and Bistonis; brother of Tereus; half-brother of Penthesilea and Hippolyta,2026-03-19 19:08:32.115927+00
+381,Itys,[],Thrace,"""sorrow""",Prince of Thrace | son of Procne and Tereus,2026-03-19 19:08:32.115927+00
+382,Procne,[],"Athens, Attica","""dark-spotted""","Queen of Thrace | mothered Itys with Tereus; daughter of Pandion and Zeuxippe; sister of Butes, Erechtheus, and Philomela",2026-03-19 19:08:32.115927+00
+383,Aesacus,"[""Seer""]",,"""???""",,2026-03-19 19:08:32.115927+00
+384,Erechtheus,[],"Athens, Attica","""earthshaker""",,2026-03-19 19:08:32.115927+00
+385,Butes,"[""Prophet""]","Athens, Attica","""herdsman""",,2026-03-19 19:08:32.115927+00
+386,Philomela,[],"Athens, Attica","""lover of song""","Princess of Athens | daughter of Pandion and Zeuxippe; sister of Butes, Erechtheus, and Procne",2026-03-19 19:08:32.115927+00
+387,Pandion,[],"Athens, Attica","""all divine""","King of Athens | fathered Butes, Erechtheus, Philomela, and Procne, with Zeuxippe",2026-03-19 19:08:32.115927+00
+388,Zeuxippe,"[""Nymph""]","""Athens, Attica""","""horse saddler""",,2026-03-19 19:08:32.115927+00
+409,Heracles,"[""Demigod""]","Thebes, Boeotia",,"fathered Tlepolemus with Astyoche (Ephyra); son of Zeus and Alcmene; half-brother of Aphrodite, Apollo, Artemis, Ares, Athena, Hephaestus, and Sarpedon",2026-03-19 19:08:32.115927+00
+411,Thestius,[],"Pleuron, Aetolia",,"King of Pleuron | fathered Althaea, Leda, Plexippus, and Toxeus with Eurythemis",2026-03-19 19:08:32.115927+00
+413,Leda,[],"Pleuron, Aetolia",,"Queen of Sparta | mothered Clytemnestra and Castor with Tyndareus; mothered Helen and Pollux with Zeus; daughter of Eurythemis and Thestius; sister of Althaea, Plexippus, and Toxeus",2026-03-19 19:08:32.115927+00
+414,Oeonus,[],"Mycenae, Argolis",,Noble of Mycenae | son of Licymnius,2026-03-19 19:08:32.115927+00
+452,Arisbe,[],"Percote, Troad",,,2026-03-19 19:08:32.115927+00
+456,Antinous,[],"Ithaca, Ionian Islands",,,2026-03-19 19:08:32.115927+00
+458,Halitherses,"[""Seer"",""Prophet""]","Ithaca, Ionian Islands",,,2026-03-19 19:08:32.115927+00
+460,Polycaste,[],"Pylos, Messenia",,"Princess of Pylos | daughter of Eurydice and Nestor; sister of Antilochus, Peisistratus, and Thrasymedes",2026-03-19 19:08:32.115927+00
+461,Peisistratus,[],"Pylos, Messenia",,"Prince of Pylos | son of Eurydice and Nestor; brother of Antilochus, Polycaste, and Thrasymedes",2026-03-19 19:08:32.115927+00
+464,Eurymachus,[],"Ithaca, Ionian Islands",,,2026-03-19 19:08:32.115927+00
+465,Medon (Ithaca),[],"Ithaca, Ionian Islands",,,2026-03-19 19:08:32.115927+00
+467,Hermes,"[""Deity""]",Mount Olympus,,"deity of messages and boundaries | son of Zeus and Maia; half-brother of Aphrodite, Apollo, Ares, Artemis, Athena, Hephaestus, Heracles, and Sarpedon",2026-03-19 19:08:32.115927+00
+469,Calypso,"[""Nymph""]",Ogygia,,,2026-03-19 19:08:32.115927+00
+471,Ino,"[""Deity""]","Thebes, Boeotia",,princess-turned-deity of protection at sea | daughter of Cadmus and Harmonia,2026-03-19 19:08:32.115927+00
+472,Nausicaa,[],Phaeacia,,Princess of Phaeacia | daughter of Alcinous and Arete,2026-03-19 19:08:32.115927+00
+473,Alcinous,[],Phaeacia,,King of Phaeacia | fathered Nausicaa with Arete,2026-03-19 19:08:32.115927+00
+474,Arete,[],Phaeacia,,Queen of Phaeacia | mothered Nausicaa with Alcinous,2026-03-19 19:08:32.115927+00
+475,Broadsea,[],Phaeacia,,,2026-03-19 19:08:32.115927+00
+476,Polyphemus,[],,,cyclops | son of Poseidon and Thoosa,2026-03-19 19:08:32.115927+00
+477,Aeolus,[],,,,2026-03-19 19:08:32.115927+00
+478,Circe,"[""Nymph""]",Aeaea,,,2026-03-19 19:08:32.115927+00
+480,Scylla,[],,,,2026-03-19 19:08:32.115927+00
+481,Laodamas,[],Phaeacia,,Prince of Phaeacia | son of Alcinous and Arete; brother of Nausicaa,2026-03-19 19:08:32.115927+00
+482,Eumaeus,[],"Syros, Cyclades",,,2026-03-19 19:08:32.115927+00
+483,Theoclymenus,"[""Seer"",""Prophet""]","Argos, Argolis",,,2026-03-19 19:08:32.115927+00
+484,Amphinomus,[],,,,2026-03-19 19:08:32.115927+00
+485,Ctesippus,[],,,,2026-03-19 19:08:32.115927+00
+487,Thersites,[],"Calydon, Aetolia",,Prince of Calydon | son of Agrius and Dia,2026-03-19 19:08:32.115927+00
+489,Eos,"[""Deity""]",the sky,,deity of dawn | mothered Memnon with Tithonus; sister of Helios and Selene,2026-03-19 19:08:32.115927+00
