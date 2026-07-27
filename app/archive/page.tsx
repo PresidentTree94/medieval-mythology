@@ -2,38 +2,72 @@ import { navs } from "@/data/navData";
 import Hero from "@/components/Hero";
 import Decor from "@/components/Decor";
 import Table from "@/components/Table";
-type BookConfig<T> = {
-  headings: string[];
-  data: T[];
-  empty: T;
-};
+import { createClient } from "@/lib/server";
+import { Book } from "@/types/BookType";
+import { Character } from "@/types/CharacterType";
+import { Inspiration } from "@/types/InspirationType";
+import { Kingdom } from "@/types/KingdomType";
+import { Diety } from "@/types/DietyType";
+import { Myth } from "@/types/MythType";
 
-export default function Archive() {
+export default async function Archive() {
 
-  const books: Record<string, BookConfig<any>> = {
+  const supabase = await createClient();
+  const { data: characterData } = await supabase.from("characters").select("*, inspiration:inspirations (id, name)");
+  const { data: inspirationData } = await supabase.from("inspirations").select();
+  const { data: kingdomData } = await supabase.from("kingdoms").select();
+  const { data: pantheonData } = await supabase.from("pantheon").select();
+  const { data: mythData } = await supabase.from("myths").select();
+
+  const books: Record<string, Book<any>> = {
     characters: {
       headings: ["Name", "Inspiration", "Residence"],
-      data: [{ name: "Name"/*, inspiration: "Inspiration", residence: "Residence"*/ }],
-      empty: { name: "" }
+      data: (characterData ?? []) as Character[],
+      empty: {
+        name: "",
+        pronunciation: "",
+        meaning: "",
+        gender: "",
+        //markers: [] as string[],
+        inspiration: null,
+        //homeland_id: null,
+        //residence_id: null
+      } as Character
+    },
+    inspirations: {
+      headings: ["Name", "Role", "Location"],
+      data: (inspirationData ?? []) as Inspiration[],
+      empty: {
+        name: "",
+        meaning: "",
+        tagline: "",
+        location: "",
+        //markers: [] as string[]
+      } as Inspiration
     },
     kingdoms: {
       headings: ["Name", "Crest", "Government"],
-      data: [{ name: "Name"/*, crest: "Crest", government: "Government"*/ }],
-      empty: { name: "" }
+      data: (kingdomData ?? []) as Kingdom[],
+      empty: {} as Kingdom
     },
     pantheon: {
       headings: ["Patron", "Domains", "Blessing"],
-      data: [{ patron: "Patron"/*, domains: "Domains", blessing: "Blessing"*/ }],
-      empty: { patron: "" }
+      data: (pantheonData ?? []) as Diety[],
+      empty: {} as Diety
     },
     myths: {
       headings: ["Title", "Source", "Summary"],
-      data: [{ title: "Title"/*, source: "Source", summary: "Summary"*/ }],
-      empty: { title: "" }
+      data: (mythData ?? []) as Myth[],
+      empty: {} as Myth
     }
   };
 
-  const total = books.characters.data.length + books.kingdoms.data.length + books.pantheon.data.length + books.myths.data.length;
+  const total = 
+    books.characters.data.length +
+    books.inspirations.data.length +
+    books.kingdoms.data.length +
+    books.pantheon.data.length +
+    books.myths.data.length;
 
   return (
     <main>

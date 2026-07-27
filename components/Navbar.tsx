@@ -35,7 +35,7 @@ export default function Navbar() {
           </button>
         </div>
         <nav className={`${open ? "flex" : "hidden lg:flex"} flex-col lg:flex-row gap-1 py-4 lg:py-0 border-t lg:border-t-0 border-border/60 text-sm uppercase tracking-widest px-4 lg:px-0`}>
-          {Object.entries(navs).map(([key, n]) => (
+          {Object.entries(navs).filter(([key, n]) => n.title !== "Inspirations").map(([key, n]) => (
             <Link key={key} href={`/${n.title.toLowerCase()}`} className={`px-4 py-2 ${pathname === `/${n.title.toLowerCase()}` ? isActive ? "text-[oklch(0.34_0.140_25)]" : "text-[oklch(0.84_0.115_84)]" : isActive ? "text-foreground-light" : "text-background-light"} ${isActive ? "hover:text-[oklch(0.34_0.140_25)]" : "hover:text-[oklch(0.84_0.115_84)]"} transition-colors duration-500`}>{n.title}</Link>
           ))}
         </nav>

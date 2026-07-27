@@ -10,6 +10,11 @@ export const navs: Record<string, NavType> = {
     icon: "ri-user-heart-line",
     description: "Living dossiers of the mortals who tread the ages — their oaths, their weapons, their inspirations."
   },
+  inspirations: {
+    title: "Inspirations",
+    icon: "ri-quill-pen-line",
+    description: "The mortals who tread the ages — their oaths, their weapons, their inspirations."
+  },
   kingdoms: {
     title: "Kingdoms",
     icon: "ri-ancient-gate-line",

@@ -1,53 +1,61 @@
 "use client";
 import { useState } from "react";
 import { NavType } from "@/data/navData";
+import { Book } from "@/types/BookType";
 import Modal from "./Modals/Modal";
 import CharacterModal from "./Modals/CharacterModal";
+import InspirationModal from "./Modals/InspirationModal";
 import KingdomModal from "./Modals/KingdomModal";
 import PantheonModal from "./Modals/PantheonModal";
 import MythModal from "./Modals/MythModal";
 
 const modalMap: Record<string, any> = {
   characters: CharacterModal,
+  inspirations: InspirationModal,
   kingdoms: KingdomModal,
   pantheon: PantheonModal,
   myths: MythModal,
 };
 
-export default function Table<T>({ nav, book }: {
-  nav: NavType;
-  book: {
-    headings: string[];
-    data: T[];
-    empty: T
-  };
-}) {
+export default function Table<T>({ nav, book }: { nav: NavType; book: Book<T>; }) {
 
   const { title, icon, description } = nav;
   const { headings, data, empty } = book;
   const single = title[title.length - 1] === "s" ? title.slice(0, -1) : "Diety";
 
-  const [openModal, setOpenModal] = useState(false);
+  const [bookData, setBookData] = useState<T[]>(data);
   const [form, setForm] = useState<T>(empty);
-  const [isEditing, setIsEditing] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [isEditing, setEditing] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState<T | null>(null);
 
   const ModalComponent = modalMap[nav.title.toLowerCase()];
 
   function openCreate() {
     setForm({ ...empty })
-    setIsEditing(false);
+    setEditing(false);
     setOpenModal(true);
   }
 
   function openEdit(d: T) {
-    setForm({ ...d });
-    setIsEditing(true);
+    setForm({ ...empty, ...d });
+    setEditing(true);
     setOpenModal(true);
+  }
+
+  function closeModal() {
+    setOpenModal(false);
+    setEditing(false);
+    setForm({ ...empty });
+  }
+
+  function handleDelete(id: number) {
+    
   }
 
   return (
     <>
-      <section id={title.toLowerCase()} className="!py-0">
+      <section id={title.toLowerCase()} className="!py-0 scroll-mt-35">
         <div>
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
             <div>
@@ -55,7 +63,7 @@ export default function Table<T>({ nav, book }: {
                 <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[oklch(0.92_0.040_25)]">
                   <i className={`${icon} text-[oklch(0.26_0.110_25)] text-xl`}></i>
                 </div>
-                <span className="text-xs tracking-[0.4em] uppercase font-display text-[oklch(0.50_0.120_76)]">{data.length} Entries</span>
+                <span className="text-xs tracking-[0.4em] uppercase font-display text-[oklch(0.50_0.120_76)]">{bookData.length} Entries</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl my-2">{title}</h2>
               <p className="italic text-foreground-light">{description}</p>
@@ -74,18 +82,18 @@ export default function Table<T>({ nav, book }: {
                 </tr>
               </thead>
               <tbody className="text-foreground-dark">
-                {data.map((d, index) => (
+                {bookData.map((d, index) => (
                   <tr key={index} className="border-t border-border/60">
                     <td className="px-5 py-4">{index + 1}</td>
                     {headings.map((h, i) => {
                       const key = h.toLowerCase() as keyof T;
                       return (
-                        <td key={i} className="px-5 py-4">{d[key] ? String(d[key]) : ""}</td>
+                        <td key={i} className="px-5 py-4">{d[key] && typeof d[key] === "object" ? Object.values(d[key])[1] : String(d[key] ?? "")}</td>
                       );
                     })}
                     <td className="px-5 py-4 flex justify-end gap-5">
                       <i className="ri-pencil-line cursor-pointer" onClick={() => openEdit(d)}></i>
-                      <i className="ri-delete-bin-line cursor-pointer"></i>
+                      <i className="ri-delete-bin-line cursor-pointer" onClick={() => setConfirmDelete(d)}></i>
                     </td>
                   </tr>
                 ))}
@@ -94,8 +102,8 @@ export default function Table<T>({ nav, book }: {
           </div>
         </div>
       </section>
-      <Modal title={single} edit={isEditing} open={openModal} setOpen={setOpenModal}>
-        <ModalComponent title={single} form={form} setForm={setForm} />
+      <Modal title={single} edit={isEditing} open={openModal} closeModal={closeModal}>
+        <ModalComponent title={single} form={form} setForm={setForm} closeModal={closeModal} />
       </Modal>
     </>
   );
