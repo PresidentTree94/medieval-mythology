@@ -58,7 +58,7 @@ export default function KingdomModal(props: Modal<Kingdom>) {
           <select value={form.deity?.id ?? ""} onChange={(e) => handleChange("deity", deities.find(i => i.id === Number(e.target.value)) ?? null)}>
           <option value="">Select an deity...</option>
           {deities.map(i => (
-            <option key={i.id} value={i.id}>{i.patron}</option>
+            <option key={i.id} value={i.id}>{i.epithet}</option>
           ))}
         </select>
         </div>
