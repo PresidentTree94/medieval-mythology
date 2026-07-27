@@ -1,4 +1,5 @@
 import { Inspiration } from "./InspirationType";
+import { Kingdom } from "./KingdomType";
 
 export type Character = {
   id: number;
@@ -8,6 +9,6 @@ export type Character = {
   gender: string;
   //markers: string[];
   inspiration: Inspiration | null;
-  //homeland_id: number | null;
-  //residence_id: number | null;
+  homeland: Kingdom | null;
+  residence: Kingdom | null;
 }

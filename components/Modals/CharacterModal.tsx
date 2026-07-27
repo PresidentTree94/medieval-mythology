@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Modal } from "@/types/ModalType";
 import { Character } from "@/types/CharacterType";
 import { Inspiration } from "@/types/InspirationType";
+import { Kingdom } from "@/types/KingdomType";
 import { createClient } from "@/lib/client";
 
 export default function CharacterModal(props: Modal<Character>) {
@@ -10,11 +11,14 @@ export default function CharacterModal(props: Modal<Character>) {
 
   const supabase = createClient();
   const [inspirations, setInspirations] = useState<Inspiration[]>([]);
+  const [kingdoms, setKingdoms] = useState<Kingdom[]>([]);
 
   useEffect(() => {
     async function loadData() {
-      const { data } = await supabase.from("inspirations").select();
-      setInspirations(data ?? []);
+      const { data: inspirationData } = await supabase.from("inspirations").select();
+      setInspirations(inspirationData ?? []);
+      const { data: kingdomData } = await supabase.from("kingdoms").select();
+      setKingdoms(kingdomData ?? []);
     }
     loadData();
   }, []);
@@ -24,7 +28,12 @@ export default function CharacterModal(props: Modal<Character>) {
   }
 
   async function handleSubmit() {
-    const { data } = await supabase.from("characters").upsert({ ...form, inspiration: form.inspiration?.id }, { onConflict: "id" }).select();
+    const { data } = await supabase.from("characters").upsert({
+      ...form,
+      inspiration: form.inspiration?.id,
+      homeland: form.homeland?.id,
+      residence: form.residence?.id
+    }, { onConflict: "id" }).select();
 
     if (!data || data.length === 0) return;
 
@@ -79,17 +88,23 @@ export default function CharacterModal(props: Modal<Character>) {
           ))}
         </select>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 opacity-50">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <label>Homeland</label>
-          <select defaultValue="" disabled>
+          <select value={form.homeland?.id ?? ""} onChange={(e) => handleChange("homeland", kingdoms.find(k => k.id === Number(e.target.value)) ?? null)}>
             <option value="">Select a homeland...</option>
+            {kingdoms.map(k => (
+              <option key={k.id} value={k.id}>{k.name}</option>
+            ))}
           </select>
         </div>
         <div className="space-y-1.5">
           <label>Residence</label>
-          <select defaultValue="" disabled>
+          <select value={form.residence?.id ?? ""} onChange={(e) => handleChange("residence", kingdoms.find(k => k.id === Number(e.target.value)) ?? null)}>
             <option value="">Select a residence...</option>
+            {kingdoms.map(k => (
+              <option key={k.id} value={k.id}>{k.name}</option>
+            ))}
           </select>
         </div>
       </div>

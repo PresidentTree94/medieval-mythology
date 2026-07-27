@@ -30,8 +30,8 @@ export default async function Archive() {
         gender: "",
         //markers: [] as string[],
         inspiration: null,
-        //homeland_id: null,
-        //residence_id: null
+        homeland: null,
+        residence: null
       } as Character
     },
     inspirations: {
