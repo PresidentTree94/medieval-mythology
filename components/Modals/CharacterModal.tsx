@@ -6,7 +6,7 @@ import { createClient } from "@/lib/client";
 
 export default function CharacterModal(props: Modal<Character>) {
 
-  const { title, form, setForm, closeModal } = props;
+  const { title, form, setForm, setBookData, closeModal } = props;
 
   const supabase = createClient();
   const [inspirations, setInspirations] = useState<Inspiration[]>([]);
@@ -23,8 +23,16 @@ export default function CharacterModal(props: Modal<Character>) {
     setForm(prev => ({ ...prev, [field]: value }));
   }
 
-  const handleSubmit = async () => {
-    await supabase.from("characters").upsert({ ...form, inspiration: form.inspiration?.id }, { onConflict: "id" });
+  async function handleSubmit() {
+    const { data } = await supabase.from("characters").upsert({ ...form, inspiration: form.inspiration?.id }, { onConflict: "id" }).select();
+
+    if (!data || data.length === 0) return;
+
+    const newRow = data[0];
+    setBookData(prev => {
+      const exists = prev.some(item => item.id === newRow.id);
+      return exists ? prev.map(item => item.id === newRow.id ? newRow : item) : [...prev, newRow];
+    });
     closeModal();
   };
 

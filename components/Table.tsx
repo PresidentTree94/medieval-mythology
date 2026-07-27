@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
 import { NavType } from "@/data/navData";
+import { createClient } from "@/lib/client";
 import { Book } from "@/types/BookType";
+import Overlay from "./Modals/Overlay";
 import Modal from "./Modals/Modal";
 import CharacterModal from "./Modals/CharacterModal";
 import InspirationModal from "./Modals/InspirationModal";
@@ -17,7 +19,7 @@ const modalMap: Record<string, any> = {
   myths: MythModal,
 };
 
-export default function Table<T>({ nav, book }: { nav: NavType; book: Book<T>; }) {
+export default function Table<T extends { id: number }>({ nav, book }: { nav: NavType; book: Book<T>; }) {
 
   const { title, icon, description } = nav;
   const { headings, data, empty } = book;
@@ -27,7 +29,7 @@ export default function Table<T>({ nav, book }: { nav: NavType; book: Book<T>; }
   const [form, setForm] = useState<T>(empty);
   const [openModal, setOpenModal] = useState(false);
   const [isEditing, setEditing] = useState(false);
-  const [confirmDelete, setConfirmDelete] = useState<T | null>(null);
+  const [confirmDelete, setConfirmDelete] = useState<number | null>(null);
 
   const ModalComponent = modalMap[nav.title.toLowerCase()];
 
@@ -49,8 +51,12 @@ export default function Table<T>({ nav, book }: { nav: NavType; book: Book<T>; }
     setForm({ ...empty });
   }
 
-  function handleDelete(id: number) {
-    
+  async function handleDelete(id: number | null) {
+    if (!id) return;
+    const supabase = createClient();
+    await supabase.from(title.toLowerCase()).delete().eq("id", id);
+    setBookData(prev => prev.filter(item => item.id !== id));
+    setConfirmDelete(null);
   }
 
   return (
@@ -93,7 +99,7 @@ export default function Table<T>({ nav, book }: { nav: NavType; book: Book<T>; }
                     })}
                     <td className="px-5 py-4 flex justify-end gap-5">
                       <i className="ri-pencil-line cursor-pointer" onClick={() => openEdit(d)}></i>
-                      <i className="ri-delete-bin-line cursor-pointer" onClick={() => setConfirmDelete(d)}></i>
+                      <i className="ri-delete-bin-line cursor-pointer" onClick={() => setConfirmDelete(d.id)}></i>
                     </td>
                   </tr>
                 ))}
@@ -102,9 +108,21 @@ export default function Table<T>({ nav, book }: { nav: NavType; book: Book<T>; }
           </div>
         </div>
       </section>
-      <Modal title={single} edit={isEditing} open={openModal} closeModal={closeModal}>
-        <ModalComponent title={single} form={form} setForm={setForm} closeModal={closeModal} />
-      </Modal>
+      <Overlay openValue={openModal}>
+        <Modal title={single} edit={isEditing} closeModal={closeModal}>
+          <ModalComponent title={single} form={form} setForm={setForm} setBookData={setBookData} closeModal={closeModal} />
+        </Modal>
+      </Overlay>
+      <Overlay openValue={confirmDelete !== null}>
+        <div className="bg-card max-w-sm rounded-lg p-6 border border-border/70">
+          <h3 className="text-lg text-foreground-dark">Delete {single}?</h3>
+          <p className="text-sm text-foreground-light mt-2 mb-6">This action cannot be undone. The {single.toLowerCase()} will be permanently removed from the archive.</p>
+          <div className="flex justify-end gap-3 text-sm uppercase font-display tracking-widest">
+            <button type="button" className="px-5 py-2.5 rounded-md border border-border hover:bg-background-light text-foreground-light transition-colors cursor-pointer" onClick={() => setConfirmDelete(null)}>Cancel</button>
+            <button type="button" className="px-5 py-2.5 rounded-md bg-[oklch(0.50_0.170_25)] hover:bg-[oklch(0.42_0.160_25)] text-card transition-colors cursor-pointer" onClick={() => handleDelete(confirmDelete)}>Delete</button>
+          </div>
+        </div>
+      </Overlay>
     </>
   );
 }

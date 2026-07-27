@@ -4,15 +4,23 @@ import { createClient } from "@/lib/client";
 
 export default function InspirationModal(props: Modal<Inspiration>) {
 
-  const { title, form, setForm, closeModal } = props;
+  const { title, form, setForm, setBookData, closeModal } = props;
 
   function handleChange<K extends keyof Inspiration>(field: K, value: Inspiration[K]) {
     setForm(prev => ({ ...prev, [field]: value }));
   }
 
-  const handleSubmit = async () => {
+  async function handleSubmit() {
     const supabase = createClient();
-    await supabase.from("inspirations").upsert(form, { onConflict: "id" });
+    const { data } = await supabase.from("inspirations").upsert(form, { onConflict: "id" }).select();
+
+    if (!data || data.length === 0) return;
+
+    const newRow = data[0];
+    setBookData(prev => {
+      const exists = prev.some(item => item.id === newRow.id);
+      return exists ? prev.map(item => item.id === newRow.id ? newRow : item) : [...prev, newRow];
+    });
     closeModal();
   };
 
