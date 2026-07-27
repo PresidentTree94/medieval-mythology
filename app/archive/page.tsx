@@ -62,7 +62,11 @@ export default async function Archive() {
     myths: {
       headings: ["Title", "Source", "Summary"],
       data: (mythData ?? []) as Myth[],
-      empty: {} as Myth
+      empty: {
+        title: "",
+        source: "",
+        summary: ""
+      } as Myth
     }
   };
 

@@ -32,7 +32,7 @@ export default function Home() {
         text="The archive is bound in four books — mortals, realms, gods, and stories — each keeping the others honest, each open to any wandering scholar."
       >
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {Object.entries(navs).map(([key, n]) => (
+          {Object.entries(navs).filter(([key, n]) => n.title !== "Inspirations").map(([key, n]) => (
             <Link key={key} href={`/${key}`} className="card group p-8 flex flex-col gap-4">
               <div className="flex justify-between">
                 <div className="w-14 h-14 bg-[oklch(0.92_0.040_25)] rounded-full flex items-center justify-center">

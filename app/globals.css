@@ -55,7 +55,7 @@ label {
   @apply text-xs font-display text-foreground-light uppercase tracking-widest block;
 }
 
-input, select {
+input, select, textarea {
   @apply px-3 py-2.5 w-full rounded-md border border-border text-sm text-foreground-dark outline-none focus:border-[oklch(0.62_0.160_25)] transition-colors;
 }
 
