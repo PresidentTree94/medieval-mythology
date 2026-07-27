@@ -23,7 +23,7 @@ export default function Table<T extends { id: number }>({ nav, book }: { nav: Na
 
   const { title, icon, description } = nav;
   const { headings, data, empty } = book;
-  const single = title[title.length - 1] === "s" ? title.slice(0, -1) : "Diety";
+  const single = title[title.length - 1] === "s" ? title.slice(0, -1) : "Deity";
 
   const [bookData, setBookData] = useState<T[]>(data);
   const [form, setForm] = useState<T>(empty);

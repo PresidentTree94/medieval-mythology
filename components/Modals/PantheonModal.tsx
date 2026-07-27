@@ -1,12 +1,12 @@
 import { Modal } from "@/types/ModalType";
-import { Diety } from "@/types/DietyType";
+import { Deity } from "@/types/DeityType";
 import { createClient } from "@/lib/client";
 
-export default function PantheonModal(props: Modal<Diety>) {
+export default function PantheonModal(props: Modal<Deity>) {
 
   const { title, form, setForm, setBookData, closeModal } = props;
 
-  function handleChange<K extends keyof Diety>(field: K, value: Diety[K]) {
+  function handleChange<K extends keyof Deity>(field: K, value: Deity[K]) {
     setForm(prev => ({ ...prev, [field]: value }));
   }
 

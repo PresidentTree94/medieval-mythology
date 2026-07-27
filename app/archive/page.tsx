@@ -7,7 +7,7 @@ import { Book } from "@/types/BookType";
 import { Character } from "@/types/CharacterType";
 import { Inspiration } from "@/types/InspirationType";
 import { Kingdom } from "@/types/KingdomType";
-import { Diety } from "@/types/DietyType";
+import { Deity } from "@/types/DeityType";
 import { Myth } from "@/types/MythType";
 
 export default async function Archive() {
@@ -48,16 +48,21 @@ export default async function Archive() {
     kingdoms: {
       headings: ["Name", "Crest", "Government"],
       data: (kingdomData ?? []) as Kingdom[],
-      empty: {} as Kingdom
+      empty: {
+        name: "",
+        crest: "",
+        government: "",
+        deity: null
+      } as Kingdom
     },
     pantheon: {
       headings: ["Patron", "Domains", "Blessing"],
-      data: (pantheonData ?? []) as Diety[],
+      data: (pantheonData ?? []) as Deity[],
       empty: {
         patron: "",
         blessing: "",
         description: ""
-      } as Diety
+      } as Deity
     },
     myths: {
       headings: ["Title", "Source", "Summary"],

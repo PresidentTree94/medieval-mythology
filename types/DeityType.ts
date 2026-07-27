@@ -1,4 +1,4 @@
-export type Diety = {
+export type Deity = {
   id: number;
   patron: string;
   blessing: string;
