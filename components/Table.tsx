@@ -98,8 +98,8 @@ export default function Table<T extends { id: number }>({ nav, book }: { nav: Na
                       );
                     })}
                     <td className="px-5 py-4 flex justify-end gap-5">
-                      <i className="ri-pencil-line cursor-pointer" onClick={() => openEdit(d)}></i>
-                      <i className="ri-delete-bin-line cursor-pointer" onClick={() => setConfirmDelete(d.id)}></i>
+                      <i className="ri-pencil-line hover:text-[oklch(0.50_0.170_25)] cursor-pointer transition-colors" onClick={() => openEdit(d)}></i>
+                      <i className="ri-delete-bin-line hover:text-[oklch(0.50_0.170_25)] cursor-pointer transition-colors" onClick={() => setConfirmDelete(d.id)}></i>
                     </td>
                   </tr>
                 ))}

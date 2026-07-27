@@ -27,8 +27,8 @@ export default function PantheonModal(props: Modal<Deity>) {
   return (
     <form id={`${title.toLowerCase()}Form`} onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
       <div className="space-y-1.5">
-        <label>Patron *</label>
-        <input type="text" required value={form.patron} onChange={(e) => handleChange("patron", e.target.value)} />
+        <label>Epithet *</label>
+        <input type="text" required value={form.epithet} onChange={(e) => handleChange("epithet", e.target.value)} />
       </div>
       <div className="space-y-1.5 opacity-50">
         <label>Domains</label>

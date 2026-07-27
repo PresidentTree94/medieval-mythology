@@ -15,8 +15,8 @@ export default async function Archive() {
   const supabase = await createClient();
   const { data: characterData } = await supabase.from("characters").select("*, inspiration:inspirations (id, name)");
   const { data: inspirationData } = await supabase.from("inspirations").select();
-  const { data: kingdomData } = await supabase.from("kingdoms").select();
-  const { data: pantheonData } = await supabase.from("pantheon").select();
+  const { data: kingdomData } = await supabase.from("kingdoms").select("*, deity:pantheon (id, name)");
+  const { data: pantheonData } = await supabase.from("pantheon").select().order("epithet");
   const { data: mythData } = await supabase.from("myths").select();
 
   const books: Record<string, Book<any>> = {
@@ -56,10 +56,10 @@ export default async function Archive() {
       } as Kingdom
     },
     pantheon: {
-      headings: ["Patron", "Domains", "Blessing"],
+      headings: ["Epithet", "Domains", "Blessing"],
       data: (pantheonData ?? []) as Deity[],
       empty: {
-        patron: "",
+        epithet: "",
         blessing: "",
         description: ""
       } as Deity

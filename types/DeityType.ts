@@ -1,6 +1,6 @@
 export type Deity = {
   id: number;
-  patron: string;
+  epithet: string;
   blessing: string;
   description: string;
 }
