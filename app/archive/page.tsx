@@ -53,7 +53,11 @@ export default async function Archive() {
     pantheon: {
       headings: ["Patron", "Domains", "Blessing"],
       data: (pantheonData ?? []) as Diety[],
-      empty: {} as Diety
+      empty: {
+        patron: "",
+        blessing: "",
+        description: ""
+      } as Diety
     },
     myths: {
       headings: ["Title", "Source", "Summary"],

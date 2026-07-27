@@ -28,7 +28,7 @@ export default function InspirationModal(props: Modal<Inspiration>) {
     <form id={`${title.toLowerCase()}Form`} onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
       <div className="space-y-1.5">
         <label>Name *</label>
-        <input type="text" required value={form.name} onChange={(e) => handleChange("name", e.target.value)}  />
+        <input type="text" required value={form.name} onChange={(e) => handleChange("name", e.target.value)} />
       </div>
       <div className="space-y-1.5">
         <label>Meaning</label>

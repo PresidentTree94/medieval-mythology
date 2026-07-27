@@ -12,6 +12,6 @@ export default function MythModal(props: Modal<Myth>) {
   async function handleSubmit() {}
 
   return (
-    <form id={`${title.toLowerCase}Form`}></form>
+    <form id={`${title.toLowerCase()}Form`}></form>
   );
 }
