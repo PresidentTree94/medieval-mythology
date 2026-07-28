@@ -68,6 +68,7 @@ export default async function Archive() {
       data: (pantheonData ?? []) as Deity[],
       empty: {
         epithet: "",
+        domains: [] as string[],
         blessing: "",
         description: ""
       } as Deity

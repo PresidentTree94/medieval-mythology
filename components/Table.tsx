@@ -94,7 +94,7 @@ export default function Table<T extends { id: number }>({ nav, book }: { nav: Na
                     {headings.map((h, i) => {
                       const key = h.toLowerCase() as keyof T;
                       return (
-                        <td key={i} className={`px-5 py-4 ${key === "summary" ? "max-w-100 line-clamp-2" : "whitespace-nowrap"}`}>{d[key] && typeof d[key] === "object" ? Object.values(d[key])[1] : String(d[key] ?? "")}</td>
+                        <td key={i} className={`px-5 py-4 ${key === "summary" ? "max-w-100 line-clamp-2" : "whitespace-nowrap"}`}>{Array.isArray(d[key]) ? d[key].join(", ") : typeof d[key] === "object" && d[key] !== null ? Object.values(d[key])[1] : String(d[key] ?? "")}</td>
                       );
                     })}
                     <td className="px-5 py-4 flex justify-end gap-5">
