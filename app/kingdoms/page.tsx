@@ -7,7 +7,7 @@ import { Kingdom } from "@/types/KingdomType";
 export default async function Kingdoms() {
 
   const supabase = await createClient();
-  const { data } = await supabase.from("kingdoms").select("*, deity:pantheon (id, name)").order("name");
+  const { data } = await supabase.from("kingdoms").select("*, deity:pantheon (id, epithet)").order("name");
   const kingdoms = (data ?? []) as Kingdom[];
 
   return (
