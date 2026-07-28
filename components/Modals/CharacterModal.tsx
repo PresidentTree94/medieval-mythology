@@ -28,7 +28,7 @@ export default function CharacterModal(props: Modal<Character>) {
   }
 
   async function handleSubmit() {
-    const { data } = await supabase.from("characters").upsert({
+    const { data, error } = await supabase.from("characters").upsert({
       ...form,
       inspiration: form.inspiration?.id,
       homeland: form.homeland?.id,

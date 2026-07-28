@@ -14,15 +14,21 @@ export default async function Archive() {
 
   const supabase = await createClient();
   const { data: characterData } = await supabase.from("characters").select("*, inspiration:inspirations (id, name)");
-  const { data: inspirationData } = await supabase.from("inspirations").select();
-  const { data: kingdomData } = await supabase.from("kingdoms").select("*, deity:pantheon (id, name)");
+  const { data: inspirationData } = await supabase.from("inspirations").select().order("name");
+  const { data: kingdomData } = await supabase.from("kingdoms").select("*, deity:pantheon (id, name)").order("name");
   const { data: pantheonData } = await supabase.from("pantheon").select().order("epithet");
-  const { data: mythData } = await supabase.from("myths").select();
+  const { data: mythData } = await supabase.from("myths").select().order("title");
+
+  const sortedCharacters = (characterData ?? []).sort((a, b) => {
+    const lastA = a.name.trim().split(" ").slice(-1)[0].toLowerCase();
+    const lastB = b.name.trim().split(" ").slice(-1)[0].toLowerCase();
+    return lastA.localeCompare(lastB);
+  });
 
   const books: Record<string, Book<any>> = {
     characters: {
       headings: ["Name", "Inspiration", "Residence"],
-      data: (characterData ?? []) as Character[],
+      data: sortedCharacters as Character[],
       empty: {
         name: "",
         pronunciation: "",
