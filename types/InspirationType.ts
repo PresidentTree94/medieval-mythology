@@ -3,6 +3,6 @@ export type Inspiration = {
   name: string;
   meaning: string;
   role: string;
-  location: string;
+  homeland: string;
   markers: string[];
 }

@@ -46,7 +46,7 @@ export default function InspirationModal(props: Modal<Inspiration>) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <label>Location</label>
-          <input type="text" value={form.location} onChange={(e) => handleChange("location", e.target.value)} />
+          <input type="text" value={form.homeland} onChange={(e) => handleChange("homeland", e.target.value)} />
         </div>
         <div className="space-y-1.5">
           <label>Markers</label>

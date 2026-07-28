@@ -87,14 +87,14 @@ export default function Table<T extends { id: number }>({ nav, book }: { nav: Na
                   <th className="px-5 py-3.5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="text-foreground-dark whitespace-nowrap">
+              <tbody className="text-foreground-dark">
                 {bookData.map((d, index) => (
                   <tr key={index} className="border-t border-border/60">
                     <td className="px-5 py-4">{index + 1}</td>
                     {headings.map((h, i) => {
                       const key = h.toLowerCase() as keyof T;
                       return (
-                        <td key={i} className="px-5 py-4">{d[key] && typeof d[key] === "object" ? Object.values(d[key])[1] : String(d[key] ?? "")}</td>
+                        <td key={i} className={`px-5 py-4 ${key === "summary" ? "max-w-100 line-clamp-2" : "whitespace-nowrap"}`}>{d[key] && typeof d[key] === "object" ? Object.values(d[key])[1] : String(d[key] ?? "")}</td>
                       );
                     })}
                     <td className="px-5 py-4 flex justify-end gap-5">

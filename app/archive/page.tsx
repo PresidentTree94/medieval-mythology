@@ -41,13 +41,13 @@ export default async function Archive() {
       } as Character
     },
     inspirations: {
-      headings: ["Name", "Role", "Location"],
+      headings: ["Name", "Role", "Homeland"],
       data: (inspirationData ?? []) as Inspiration[],
       empty: {
         name: "",
         meaning: "",
         role: "",
-        location: "",
+        homeland: "",
         markers: [] as string[]
       } as Inspiration
     },
