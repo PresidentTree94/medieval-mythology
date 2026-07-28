@@ -57,6 +57,8 @@ export default async function Archive() {
       empty: {
         name: "",
         crest: "",
+        medieval: "",
+        language: "",
         government: "",
         deity: null
       } as Kingdom
