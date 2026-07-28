@@ -45,7 +45,7 @@ export default async function Kingdoms() {
                     <h3 className="text-3xl md:text-4xl text-foreground-dark my-2">{k.name}</h3>
                     <span className="italic text-foreground-light">Tagline</span>
                     <p className="mt-5 text-foreground-light">Description</p>
-                    <div className="grid grid-cols-2 gap-4 mt-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
                       {stats.map((s, index) => (
                         <div key={index} className="space-y-1">
                           <p className="text-xs tracking-[0.2em] uppercase font-display text-[oklch(0.34_0.140_25)]">{s.label}</p>
