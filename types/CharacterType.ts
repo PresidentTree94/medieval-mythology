@@ -7,7 +7,7 @@ export type Character = {
   pronunciation: string;
   meaning: string;
   gender: string;
-  //markers: string[];
+  markers: string[];
   inspiration: Inspiration | null;
   homeland: Kingdom | null;
   residence: Kingdom | null;

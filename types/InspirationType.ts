@@ -4,5 +4,5 @@ export type Inspiration = {
   meaning: string;
   tagline: string;
   location: string;
-  //markers: string[];
+  markers: string[];
 }

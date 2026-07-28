@@ -28,7 +28,7 @@ export default async function Archive() {
         pronunciation: "",
         meaning: "",
         gender: "",
-        //markers: [] as string[],
+        markers: [] as string[],
         inspiration: null,
         homeland: null,
         residence: null
@@ -42,7 +42,7 @@ export default async function Archive() {
         meaning: "",
         tagline: "",
         location: "",
-        //markers: [] as string[]
+        markers: [] as string[]
       } as Inspiration
     },
     kingdoms: {

@@ -68,14 +68,14 @@ export default function CharacterModal(props: Modal<Character>) {
             <option value="Male">Male</option>
           </select>
         </div>
-        <div className="space-y-1.5 opacity-50">
+        <div className="space-y-1.5">
           <label>Markers</label>
-          <select multiple size={1} disabled>
-            <option>Deity</option>
-            <option>Demigod</option>
-            <option>Nymph</option>
-            <option>Seer</option>
-            <option>Prophet</option>
+          <select multiple size={1} value={form.markers} onChange={(e) => handleChange("markers", Array.from(e.target.selectedOptions, o => o.value))}>
+            <option value="Deity">Deity</option>
+            <option value="Demigod">Demigod</option>
+            <option value="Nymph">Nymph</option>
+            <option value="Seer">Seer</option>
+            <option value="Prophet">Prophet</option>
           </select>
         </div>
       </div>
