@@ -12,7 +12,12 @@ export default function InspirationModal(props: Modal<Inspiration>) {
 
   async function handleSubmit() {
     const supabase = createClient();
-    const { data } = await supabase.from("inspirations").upsert(form, { onConflict: "id" }).select();
+    const { data, error } = await supabase.from("inspirations").upsert(form, { onConflict: "id" }).select();
+
+    if (error) {
+      console.error(error);
+      return;
+    }
 
     if (!data || data.length === 0) return;
 
@@ -35,8 +40,8 @@ export default function InspirationModal(props: Modal<Inspiration>) {
         <input type="text" value={form.meaning} onChange={(e) => handleChange("meaning", e.target.value)} />
       </div>
       <div className="space-y-1.5">
-        <label>Tagline</label>
-        <input type="text" value={form.tagline} onChange={(e) => handleChange("tagline", e.target.value)} />
+        <label>Role</label>
+        <input type="text" value={form.role} onChange={(e) => handleChange("role", e.target.value)} />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">

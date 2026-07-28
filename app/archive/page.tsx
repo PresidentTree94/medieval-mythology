@@ -15,7 +15,7 @@ export default async function Archive() {
   const supabase = await createClient();
   const { data: characterData } = await supabase.from("characters").select("*, inspiration:inspirations (id, name)");
   const { data: inspirationData } = await supabase.from("inspirations").select().order("name");
-  const { data: kingdomData } = await supabase.from("kingdoms").select("*, deity:pantheon (id, name)").order("name");
+  const { data: kingdomData } = await supabase.from("kingdoms").select("*, deity:pantheon (id, epithet)").order("name");
   const { data: pantheonData } = await supabase.from("pantheon").select().order("epithet");
   const { data: mythData } = await supabase.from("myths").select().order("title");
 
@@ -46,7 +46,7 @@ export default async function Archive() {
       empty: {
         name: "",
         meaning: "",
-        tagline: "",
+        role: "",
         location: "",
         markers: [] as string[]
       } as Inspiration

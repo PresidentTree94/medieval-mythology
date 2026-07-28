@@ -24,7 +24,12 @@ export default function KingdomModal(props: Modal<Kingdom>) {
   }
 
   async function handleSubmit() {
-    const { data } = await supabase.from("kingdoms").upsert({ ...form, deity: form.deity ? form.deity.id : null }, { onConflict: "id" }).select();
+    const { data, error } = await supabase.from("kingdoms").upsert({ ...form, deity: form.deity ? form.deity.id : null }, { onConflict: "id" }).select();
+
+    if (error) {
+      console.error(error);
+      return;
+    }
 
     if (!data || data.length === 0) return;
 

@@ -87,7 +87,7 @@ export default function Table<T extends { id: number }>({ nav, book }: { nav: Na
                   <th className="px-5 py-3.5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="text-foreground-dark">
+              <tbody className="text-foreground-dark whitespace-nowrap">
                 {bookData.map((d, index) => (
                   <tr key={index} className="border-t border-border/60">
                     <td className="px-5 py-4">{index + 1}</td>

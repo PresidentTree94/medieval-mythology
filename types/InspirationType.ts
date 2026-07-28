@@ -2,7 +2,7 @@ export type Inspiration = {
   id: number;
   name: string;
   meaning: string;
-  tagline: string;
+  role: string;
   location: string;
   markers: string[];
 }
