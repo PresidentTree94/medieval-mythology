@@ -43,24 +43,28 @@ export default function KingdomModal(props: Modal<Kingdom>) {
 
   return (
     <form id={`${title.toLowerCase()}Form`} onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-1.5">
+      <div className="space-y-1.5">
           <label>Name *</label>
           <input type="text" required value={form.name} onChange={(e) => handleChange("name", e.target.value)} />
         </div>
-        <div className="space-y-1.5">
-          <label>Crest</label>
-          <input type="text" value={form.crest} onChange={(e) => handleChange("crest", e.target.value)} />
-        </div>
-      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <label>Medieval</label>
           <input type="text" value={form.medieval} onChange={(e) => handleChange("medieval", e.target.value)} />
         </div>
         <div className="space-y-1.5">
+          <label>Mythology</label>
+          <input type="text" value={form.mythology} onChange={(e) => handleChange("mythology", e.target.value)} />
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="space-y-1.5">
           <label>Language</label>
           <input type="text" value={form.language} onChange={(e) => handleChange("language", e.target.value)} />
+        </div>
+        <div className="space-y-1.5">
+          <label>Crest</label>
+          <input type="text" value={form.crest} onChange={(e) => handleChange("crest", e.target.value)} />
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

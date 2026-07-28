@@ -58,6 +58,7 @@ export default async function Archive() {
         name: "",
         crest: "",
         medieval: "",
+        mythology: "",
         language: "",
         government: "",
         deity: null
