@@ -31,7 +31,7 @@ section:not(:has(> img)) > div {
   @apply font-display text-xs uppercase tracking-[0.5em] text-[oklch(0.50_0.120_76)];
 }
 
-.topper h2:not(.gilded) {
+.topper h2 {
   @apply text-foreground-dark mt-3;
 }
 

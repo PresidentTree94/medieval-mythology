@@ -13,11 +13,21 @@ import { Myth } from "@/types/MythType";
 export default async function Archive() {
 
   const supabase = await createClient();
-  const { data: characterData } = await supabase.from("characters").select("*, inspiration:inspirations (id, name)");
-  const { data: inspirationData } = await supabase.from("inspirations").select().order("name");
-  const { data: kingdomData } = await supabase.from("kingdoms").select("*, deity:pantheon (id, epithet)").order("name");
-  const { data: pantheonData } = await supabase.from("pantheon").select().order("epithet");
-  const { data: mythData } = await supabase.from("myths").select().order("title");
+
+  const { data: characterData, error: characterError } = await supabase.from("characters").select("*, inspiration:inspirations (id, name), homeland:kingdoms!characters_homeland_fkey (id, name), residence:kingdoms!characters_residence_fkey (id, name)");
+  if (characterError) console.error(characterError);
+
+  const { data: inspirationData, error: inspirationError } = await supabase.from("inspirations").select().order("name");
+  if (inspirationError) console.error(inspirationError);
+
+  const { data: kingdomData, error: kingdomError } = await supabase.from("kingdoms").select("*, deity:pantheon (id, epithet)").order("name");
+  if (kingdomError) console.error(kingdomError);
+
+  const { data: pantheonData, error: pantheonError } = await supabase.from("pantheon").select().order("epithet");
+  if (pantheonError) console.error(pantheonError);
+
+  const { data: mythData, error: mythError } = await supabase.from("myths").select().order("title");
+  if (mythError) console.error(mythError);
 
   const sortedCharacters = (characterData ?? []).sort((a, b) => {
     const lastA = a.name.trim().split(" ").slice(-1)[0].toLowerCase();
