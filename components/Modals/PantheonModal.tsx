@@ -57,7 +57,7 @@ export default function PantheonModal(props: Modal<Deity>) {
           <button type="button" className="px-4 py-2.5 text-xs rounded-md bg-[oklch(0.52_0.090_55)] hover:bg-[oklch(0.44_0.082_55)] text-card uppercase font-display tracking-widest transition-colors cursor-pointer" onClick={addDomain}>Add</button>
         </div>
         <div className="mt-2 flex flex-wrap gap-2 text-xs">
-          {form.domains.map((d, index) => (
+          {form.domains && form.domains.map((d, index) => (
             <span key={index} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[oklch(0.92_0.028_55)] text-[oklch(0.28_0.055_55)]">
               {d}
               <i className="ri-close-line" onClick={() => removeDomain(index)}></i>
