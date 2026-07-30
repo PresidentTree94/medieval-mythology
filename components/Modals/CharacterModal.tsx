@@ -3,13 +3,13 @@ import { Modal } from "@/types/ModalType";
 import { Character } from "@/types/CharacterType";
 import { Inspiration } from "@/types/InspirationType";
 import { Kingdom } from "@/types/KingdomType";
-import { createClient } from "@/lib/client";
+import { useModalForm } from "@/hooks/useModalForm";
+import FormField from "./FormField";
 
 export default function CharacterModal(props: Modal<Character>) {
 
   const { title, form, setForm, setBookData, closeModal } = props;
-
-  const supabase = createClient();
+  const { supabase, handleChange, handleSubmit } = useModalForm("characters", form, setForm, setBookData, closeModal);
   const [inspirations, setInspirations] = useState<Inspiration[]>([]);
   const [kingdoms, setKingdoms] = useState<Kingdom[]>([]);
 
@@ -22,59 +22,32 @@ export default function CharacterModal(props: Modal<Character>) {
     }
     loadData();
   }, []);
-   
-  function handleChange<K extends keyof Character>(field: K, value: Character[K]) {
-    setForm(prev => ({ ...prev, [field]: value }));
-  }
-
-  async function handleSubmit() {
-    const { data, error } = await supabase.from("characters").upsert({
-      ...form,
-      inspiration: form.inspiration?.id,
-      homeland: form.homeland?.id,
-      residence: form.residence?.id
-    }, { onConflict: "id" }).select();
-
-    if (error) {
-      console.error(error);
-      return;
-    }
-
-    if (!data || data.length === 0) return;
-
-    const newRow = data[0];
-    setBookData(prev => {
-      const exists = prev.some(item => item.id === newRow.id);
-      return exists ? prev.map(item => item.id === newRow.id ? newRow : item) : [...prev, newRow];
-    });
-    closeModal();
-  };
 
   return (
-    <form id={`${title.toLowerCase()}Form`} onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-      <div className="space-y-1.5">
-        <label>Name *</label>
+    <form id={`${title.toLowerCase()}Form`} onSubmit={(e) => { e.preventDefault(); handleSubmit(f => ({
+      ...f,
+      inspiration: f.inspiration?.id,
+      homeland: f.homeland?.id,
+      residence: f.residence?.id
+    })); }}>
+      <FormField label="Name *">
         <input type="text" required value={form.name} onChange={(e) => handleChange("name", e.target.value)} />
-      </div>
-      <div className="space-y-1.5">
-        <label>Pronunication</label>
+      </FormField>
+      <FormField label="Pronunciation">
         <input type="text" value={form.pronunciation} onChange={(e) => handleChange("pronunciation", e.target.value)} />
-      </div>
-      <div className="space-y-1.5">
-        <label>Meaning</label>
+      </FormField>
+      <FormField label="Meaning">
         <input type="text" value={form.meaning} onChange={(e) => handleChange("meaning", e.target.value)} />
-      </div>
+      </FormField>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-1.5">
-          <label>Gender</label>
+        <FormField label="Gender">
           <select value={form.gender} onChange={(e) => handleChange("gender", e.target.value)}>
             <option value="">Select a gender...</option>
             <option value="Female">Female</option>
             <option value="Male">Male</option>
           </select>
-        </div>
-        <div className="space-y-1.5">
-          <label>Markers</label>
+        </FormField>
+        <FormField label="Markers">
           <select multiple size={1} value={form.markers} onChange={(e) => handleChange("markers", Array.from(e.target.selectedOptions, o => o.value))}>
             <option value="Deity">Deity</option>
             <option value="Demigod">Demigod</option>
@@ -82,36 +55,33 @@ export default function CharacterModal(props: Modal<Character>) {
             <option value="Seer">Seer</option>
             <option value="Prophet">Prophet</option>
           </select>
-        </div>
+        </FormField>
       </div>
-      <div className="space-y-1.5">
-        <label>Inspiration *</label>
+      <FormField label="Inspiration *">
         <select required value={form.inspiration?.id ?? ""} onChange={(e) => handleChange("inspiration", inspirations.find(i => i.id === Number(e.target.value)) ?? null)}>
           <option value="">Select an inspiration...</option>
           {inspirations.map(i => (
             <option key={i.id} value={i.id}>{i.name}</option>
           ))}
         </select>
-      </div>
+      </FormField>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-1.5">
-          <label>Homeland</label>
+        <FormField label="Homeland">
           <select value={form.homeland?.id ?? ""} onChange={(e) => handleChange("homeland", kingdoms.find(k => k.id === Number(e.target.value)) ?? null)}>
             <option value="">Select a homeland...</option>
             {kingdoms.map(k => (
               <option key={k.id} value={k.id}>{k.name}</option>
             ))}
           </select>
-        </div>
-        <div className="space-y-1.5">
-          <label>Residence</label>
+        </FormField>
+        <FormField label="Residence">
           <select value={form.residence?.id ?? ""} onChange={(e) => handleChange("residence", kingdoms.find(k => k.id === Number(e.target.value)) ?? null)}>
             <option value="">Select a residence...</option>
             {kingdoms.map(k => (
               <option key={k.id} value={k.id}>{k.name}</option>
             ))}
           </select>
-        </div>
+        </FormField>
       </div>
     </form>
   );

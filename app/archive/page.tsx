@@ -17,6 +17,14 @@ export default async function Archive() {
   const { data: characterData, error: characterError } = await supabase.from("characters").select("*, inspiration:inspirations (id, name), homeland:kingdoms!characters_homeland_fkey (id, name), residence:kingdoms!characters_residence_fkey (id, name)");
   if (characterError) console.error(characterError);
 
+  const sortedCharacters: Character[] = (characterData ?? []).sort((a, b) => {
+    const lastA = a.name.trim().split(" ").slice(-1)[0].toLowerCase();
+    const lastB = b.name.trim().split(" ").slice(-1)[0].toLowerCase();
+    return lastA.localeCompare(lastB);
+  });
+
+  const usedInspirationIds = new Set(sortedCharacters.filter(c => c.inspiration?.id).map(c => c.inspiration?.id));
+
   const { data: inspirationData, error: inspirationError } = await supabase.from("inspirations").select().order("name");
   if (inspirationError) console.error(inspirationError);
 
@@ -28,12 +36,6 @@ export default async function Archive() {
 
   const { data: mythData, error: mythError } = await supabase.from("myths").select().order("title");
   if (mythError) console.error(mythError);
-
-  const sortedCharacters = (characterData ?? []).sort((a, b) => {
-    const lastA = a.name.trim().split(" ").slice(-1)[0].toLowerCase();
-    const lastB = b.name.trim().split(" ").slice(-1)[0].toLowerCase();
-    return lastA.localeCompare(lastB);
-  });
 
   const books: Record<string, Book<any>> = {
     characters: {
@@ -51,8 +53,8 @@ export default async function Archive() {
       } as Character
     },
     inspirations: {
-      headings: ["Name", "Role", "Homeland"],
-      data: (inspirationData ?? []) as Inspiration[],
+      headings: ["Name", "Used", "Role", "Homeland"],
+      data: (inspirationData ?? [] as Inspiration[]).map(i => ({ ...i, used: usedInspirationIds.has(i.id) })),
       empty: {
         name: "",
         meaning: "",
