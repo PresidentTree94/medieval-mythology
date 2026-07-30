@@ -97,7 +97,7 @@ export default function Table<T extends { id: number }>({ nav, book }: { nav: Na
                         <td key={i} className={`px-5 py-4 ${key === "summary" ? "max-w-100 line-clamp-2" : "whitespace-nowrap"}`}>{
                           Array.isArray(d[key]) ? d[key].join(", ") : //array
                             typeof d[key] === "object" && d[key] !== null ? Object.values(d[key])[1] : //object
-                            typeof d[key] === "boolean" ? d[key] ? "" : "X" : //boolean
+                            typeof d[key] === "boolean" ? d[key] ? "" : <i className="ri-close-large-line"></i> : //boolean
                             String(d[key] ?? "") //string
                           }</td>
                       );

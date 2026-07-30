@@ -13,7 +13,7 @@ export default function KingdomModal(props: Modal<Kingdom>) {
 
   useEffect(() => {
     async function loadData() {
-      const { data } = await supabase.from("pantheon").select();
+      const { data } = await supabase.from("pantheon").select().order("epithet");
       setDeities(data ?? []);
     }
     loadData();

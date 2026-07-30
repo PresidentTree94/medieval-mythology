@@ -15,9 +15,9 @@ export default function CharacterModal(props: Modal<Character>) {
 
   useEffect(() => {
     async function loadData() {
-      const { data: inspirationData } = await supabase.from("inspirations").select();
+      const { data: inspirationData } = await supabase.from("inspirations").select().order("name");
       setInspirations(inspirationData ?? []);
-      const { data: kingdomData } = await supabase.from("kingdoms").select();
+      const { data: kingdomData } = await supabase.from("kingdoms").select().order("name");
       setKingdoms(kingdomData ?? []);
     }
     loadData();
