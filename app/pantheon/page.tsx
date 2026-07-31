@@ -27,7 +27,7 @@ export default async function Pantheon() {
           </div>
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {deities.map(d => (
-              <div key={d.id} className="border border-[oklch(0.50_0.120_76)]/40 hover:border-[oklch(0.72_0.150_80)] rounded-lg p-6 text-center group transition-color flex flex-col items-center justify-between gap-4">
+              <div key={d.id} className="border border-[oklch(0.50_0.120_76)]/40 hover:border-[oklch(0.72_0.150_80)] rounded-lg p-6 text-center group transition-colors flex flex-col items-center justify-between gap-4">
                 <div className="space-y-4">
                   <div className="relative aspect-square w-full max-w-32 rounded-full overflow-hidden mx-auto mb-4 border-2 border-[oklch(0.72_0.150_80)]/40 bg-background-dark transition-transform duration-500 group-hover:scale-105 group-hover:border-[oklch(0.78_0.140_82)]">
                     <Image src="/god.jpg" alt="God" fill sizes="100%" className="object-cover object-top" />

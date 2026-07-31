@@ -24,9 +24,19 @@ export default function PantheonModal(props: Modal<Deity>) {
 
   return (
     <form id={`${title.toLowerCase()}Form`} onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-      <FormField label="Epithet *">
-        <input type="text" required value={form.epithet} onChange={(e) => handleChange("epithet", e.target.value)} />
-      </FormField>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <FormField label="Epithet *">
+          <input type="text" required value={form.epithet} onChange={(e) => handleChange("epithet", e.target.value)} />
+        </FormField>
+        <FormField label="Rank">
+          <select value={form.rank} onChange={(e) => handleChange("rank", e.target.value)}>
+            <option value="">Select a rank...</option>
+            <option value="Supreme">Supreme</option>
+            <option value="Major">Major</option>
+            <option value="Minor">Minor</option>
+          </select>
+        </FormField>
+      </div>
       <FormField label="Domains">
         <div className="flex gap-2">
           <input type="text" value={domainInput} onChange={(e) => setDomainInput(e.target.value)} />
