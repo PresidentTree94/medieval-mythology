@@ -28,12 +28,14 @@ export default async function Pantheon() {
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {deities.map(d => (
               <div key={d.id} className="border border-[oklch(0.50_0.120_76)]/40 hover:border-[oklch(0.72_0.150_80)] rounded-lg p-6 text-center group transition-colors flex flex-col items-center justify-between gap-4">
-                <div className="space-y-4">
-                  <div className="relative aspect-square w-full max-w-32 rounded-full overflow-hidden mx-auto mb-4 border-2 border-[oklch(0.72_0.150_80)]/40 bg-background-dark transition-transform duration-500 group-hover:scale-105 group-hover:border-[oklch(0.78_0.140_82)]">
+                <div>
+                  <div className="relative aspect-square w-full max-w-32 rounded-full overflow-hidden mx-auto border-2 border-[oklch(0.72_0.150_80)]/40 bg-background-dark transition-transform duration-500 group-hover:scale-105 group-hover:border-[oklch(0.78_0.140_82)] mb-4">
                     <Image src="/god.jpg" alt="God" fill sizes="100%" className="object-cover object-top" />
                   </div>
-                  <h3 className="text-card text-xl">{d.epithet}</h3>
-                  <div className="flex flex-wrap gap-1.5 justify-center font-display uppercase tracking-widest text-xs">
+                  <span className="inline-block text-xs uppercase font-display tracking-[0.25em] text-[oklch(0.78_0.140_82)]">{d.rank}</span>
+                  <h3 className="text-card text-xl mt-2 mb-1">{d.epithet}</h3>
+                  <p className="text-sm italic text-border">Bestower of...</p>
+                  <div className="flex flex-wrap gap-1.5 justify-center font-display uppercase tracking-widest text-xs mt-4">
                     {d.domains.map((o, index) => (
                       <span key={index} className="px-2 py-0.5 rounded-full bg-[oklch(0.72_0.150_80)]/15 text-[oklch(0.84_0.115_84)]">{o}</span>
                     ))}

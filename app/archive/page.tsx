@@ -9,6 +9,7 @@ import { Inspiration } from "@/types/InspirationType";
 import { Kingdom } from "@/types/KingdomType";
 import { Deity } from "@/types/DeityType";
 import { Myth } from "@/types/MythType";
+import { sortCharacters } from "@/utils/sortCharacters";
 
 export default async function Archive() {
 
@@ -16,13 +17,7 @@ export default async function Archive() {
 
   const { data: characterData, error: characterError } = await supabase.from("characters").select("*, inspiration:inspirations (id, name), homeland:kingdoms!characters_homeland_fkey (id, name), residence:kingdoms!characters_residence_fkey (id, name)");
   if (characterError) console.error(characterError);
-
-  const sortedCharacters: Character[] = (characterData ?? []).sort((a, b) => {
-    const lastA = a.name.trim().split(" ").slice(-1)[0].toLowerCase();
-    const lastB = b.name.trim().split(" ").slice(-1)[0].toLowerCase();
-    return lastA.localeCompare(lastB);
-  });
-
+  const sortedCharacters = sortCharacters(characterData ?? []);
   const usedInspirationIds = new Set(sortedCharacters.filter(c => c.inspiration?.id).map(c => c.inspiration?.id));
 
   const { data: inspirationData, error: inspirationError } = await supabase.from("inspirations").select().order("name");

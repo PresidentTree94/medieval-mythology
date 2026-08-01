@@ -17,6 +17,7 @@ body {
 
 main {
   background-color: var(--color-background-dark);
+  flex: 1;
 }
 
 section:not(:has(> img)), article {

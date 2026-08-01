@@ -1,5 +1,6 @@
 import { Modal } from "@/types/ModalType";
 import { Inspiration } from "@/types/InspirationType";
+import { markersRecord } from "@/utils/markersRecord";
 import { useModalForm } from "@/hooks/useModalForm";
 import FormField from "./FormField";
 
@@ -32,11 +33,9 @@ export default function InspirationModal(props: Modal<Inspiration>) {
         </FormField>
         <FormField label="Markers">
           <select multiple size={1} value={form.markers} onChange={(e) => handleChange("markers", Array.from(e.target.selectedOptions, o => o.value))}>
-            <option value="Deity">Deity</option>
-            <option value="Demigod">Demigod</option>
-            <option value="Nymph">Nymph</option>
-            <option value="Seer">Seer</option>
-            <option value="Prophet">Prophet</option>
+            {Object.keys(markersRecord).map(key => (
+              <option key={key} value={key}>{key}</option>
+            ))}
           </select>
         </FormField>
       </div>
