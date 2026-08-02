@@ -1,14 +1,11 @@
 import Image from "next/image";
 import Hero from "@/components/Hero";
 import Decor from "@/components/Decor";
-import { createClient } from "@/lib/server";
-import { Kingdom } from "@/types/KingdomType";
+import { getKingdoms } from "@/lib/serverQueries";
 
 export default async function Kingdoms() {
 
-  const supabase = await createClient();
-  const { data } = await supabase.from("kingdoms").select("*, deity:pantheon (id, epithet)").order("name");
-  const kingdoms = (data ?? []) as Kingdom[];
+  const kingdoms = await getKingdoms({ orderBy: "name", ascending: true });
 
   return (
     <main>
@@ -38,7 +35,7 @@ export default async function Kingdoms() {
               return (
                 <div key={k.id} className={`card flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} group`}>
                   <div className="relative h-72 lg:h-auto lg:w-1/2 overflow-hidden">
-                    <Image src="/landscape.jpg" alt="Landscape" fill sizes="100%" className="object-cover object-top group-hover:scale-105 transition-transform duration-700" />
+                    <Image src="/landscape.jpg" alt="Landscape" fill sizes="100%" />
                   </div>
                   <div className="p-8 md:p-10 lg:w-1/2">
                     <p className="text-xs tracking-widest uppercase font-display text-[oklch(0.50_0.120_76)]">Subtitle</p>

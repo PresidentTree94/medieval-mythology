@@ -1,0 +1,53 @@
+import { createClient } from "./client";
+import { Character } from "@/types/CharacterType";
+import { Inspiration } from "@/types/InspirationType";
+import { Kingdom } from "@/types/KingdomType";
+import { Deity } from "@/types/DeityType";
+
+export async function getCharacters(): Promise<Character[]> {
+  const supabase = createClient();
+  const { data, error } = await supabase.from("characters").select("*, inspiration:inspirations (id, name, homeland), homeland:kingdoms!characters_homeland_fkey (id, name), residence:kingdoms!characters_residence_fkey (id, name)").order("name");
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
+export async function getInspirations(): Promise<Inspiration[]> {
+  const supabase = createClient();
+  const { data, error } = await supabase.from("inspirations").select("*").order("name");
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
+export async function getKingdoms(): Promise<Kingdom[]> {
+  const supabase = createClient();
+  const { data, error } = await supabase.from("kingdoms").select("*, deity:pantheon (id, epithet)").order("name");
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
+export async function getPantheon(): Promise<Deity[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("pantheon").select("*").order("epithet");
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}

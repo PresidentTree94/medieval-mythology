@@ -1,14 +1,11 @@
 import Hero from "@/components/Hero";
 import Decor from "@/components/Decor";
-import { createClient } from "@/lib/server";
-import { Deity } from "@/types/DeityType";
+import { getPantheon } from "@/lib/serverQueries";
 import Image from "next/image";
 
 export default async function Pantheon() {
 
-  const supabase = await createClient();
-  const { data } = await supabase.from("pantheon").select();
-  const deities = (data ?? []) as Deity[];
+  const deities = await getPantheon({ orderBy: "epithet", ascending: true });
 
   return (
     <main className="!bg-foreground-dark">

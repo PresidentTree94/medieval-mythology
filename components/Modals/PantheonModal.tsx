@@ -23,7 +23,10 @@ export default function PantheonModal(props: Modal<Deity>) {
   }
 
   return (
-    <form id={`${title.toLowerCase()}Form`} onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+    <form id={`${title.toLowerCase()}Form`} onSubmit={(e) => { e.preventDefault(); handleSubmit(f => ({
+      ...f,
+      timestamp: new Date().toISOString()
+    })); }}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <FormField label="Epithet *">
           <input type="text" required value={form.epithet} onChange={(e) => handleChange("epithet", e.target.value)} />

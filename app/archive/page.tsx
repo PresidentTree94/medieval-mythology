@@ -2,7 +2,6 @@ import { navs } from "@/data/navData";
 import Hero from "@/components/Hero";
 import Decor from "@/components/Decor";
 import Table from "@/components/Table";
-import { createClient } from "@/lib/server";
 import { Book } from "@/types/BookType";
 import { Character } from "@/types/CharacterType";
 import { Inspiration } from "@/types/InspirationType";
@@ -10,32 +9,22 @@ import { Kingdom } from "@/types/KingdomType";
 import { Deity } from "@/types/DeityType";
 import { Myth } from "@/types/MythType";
 import { sortCharacters } from "@/utils/sortCharacters";
+import * as sb from "@/lib/serverQueries";
 
 export default async function Archive() {
 
-  const supabase = await createClient();
-
-  const { data: characterData, error: characterError } = await supabase.from("characters").select("*, inspiration:inspirations (id, name), homeland:kingdoms!characters_homeland_fkey (id, name), residence:kingdoms!characters_residence_fkey (id, name)");
-  if (characterError) console.error(characterError);
+  const characterData = await sb.getCharacters();
   const sortedCharacters = sortCharacters(characterData ?? []);
   const usedInspirationIds = new Set(sortedCharacters.filter(c => c.inspiration?.id).map(c => c.inspiration?.id));
-
-  const { data: inspirationData, error: inspirationError } = await supabase.from("inspirations").select().order("name");
-  if (inspirationError) console.error(inspirationError);
-
-  const { data: kingdomData, error: kingdomError } = await supabase.from("kingdoms").select("*, deity:pantheon (id, epithet)").order("name");
-  if (kingdomError) console.error(kingdomError);
-
-  const { data: pantheonData, error: pantheonError } = await supabase.from("pantheon").select().order("epithet");
-  if (pantheonError) console.error(pantheonError);
-
-  const { data: mythData, error: mythError } = await supabase.from("myths").select().order("title");
-  if (mythError) console.error(mythError);
+  const inspirationData = await sb.getInspirations();
+  const kingdomData = await sb.getKingdoms({ orderBy: "name", ascending: true });
+  const pantheonData = await sb.getPantheon({ orderBy: "epithet", ascending: true });
+  const mythData = await sb.getMyths({ orderBy: "title", ascending: true });
 
   const books: Record<string, Book<any>> = {
     characters: {
       headings: ["Name", "Inspiration", "Residence"],
-      data: sortedCharacters as Character[],
+      data: sortedCharacters,
       empty: {
         name: "",
         pronunciation: "",

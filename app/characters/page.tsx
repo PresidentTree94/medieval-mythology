@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Hero from "@/components/Hero";
 import Decor from "@/components/Decor";
-import { createClient } from "@/lib/client";
+import { getCharacters, getKingdoms } from "@/lib/clientQueries";
 import { Character } from "@/types/CharacterType";
 import { Kingdom } from "@/types/KingdomType";
 import { sortCharacters } from "@/utils/sortCharacters";
@@ -17,13 +17,12 @@ export default function Characters() {
   const [kingdoms, setKingdoms] = useState<Kingdom[]>([]);
 
   useEffect(() => {
-    const supabase = createClient();
     async function loadData() {
-      const { data: charactersData } = await supabase.from("characters").select("*, inspiration:inspirations (id, name, homeland), homeland:kingdoms!characters_homeland_fkey (id, name), residence:kingdoms!characters_residence_fkey (id, name)");
-      const sortedCharacters = sortCharacters(charactersData ?? []);
+      const charactersData = await getCharacters();
+      const sortedCharacters = sortCharacters(charactersData);
       setCharacters(sortedCharacters);
-      const { data: kingdomsData } = await supabase.from("kingdoms").select("*").order("name");
-      setKingdoms(kingdomsData ?? []);
+      const kingdomsData = await getKingdoms();
+      setKingdoms(kingdomsData);
     }
     loadData();
   }, []);
@@ -71,7 +70,7 @@ export default function Characters() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredCharacters.map(c => (
-              <div key={c.id} className="bg-card rounded-lg border border-border/70 overflow-hidden">
+              <div key={c.id} className="card group">
                 <div className="relative aspect-4/5 overflow-hidden flex flex-col justify-between">
                   <Image src="/royal.jpg" alt={c.name} fill sizes="100%" />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground-dark/70 to-transparent"></div>

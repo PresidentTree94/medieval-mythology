@@ -6,20 +6,21 @@ import { Kingdom } from "@/types/KingdomType";
 import { markersRecord } from "@/utils/markersRecord";
 import { useModalForm } from "@/hooks/useModalForm";
 import FormField from "./FormField";
+import { getInspirations, getKingdoms } from "@/lib/clientQueries";
 
 export default function CharacterModal(props: Modal<Character>) {
 
   const { title, form, setForm, setBookData, closeModal } = props;
-  const { supabase, handleChange, handleSubmit } = useModalForm("characters", form, setForm, setBookData, closeModal);
+  const { handleChange, handleSubmit } = useModalForm("characters", form, setForm, setBookData, closeModal);
   const [inspirations, setInspirations] = useState<Inspiration[]>([]);
   const [kingdoms, setKingdoms] = useState<Kingdom[]>([]);
 
   useEffect(() => {
     async function loadData() {
-      const { data: inspirationData } = await supabase.from("inspirations").select().order("name");
-      setInspirations(inspirationData ?? []);
-      const { data: kingdomData } = await supabase.from("kingdoms").select().order("name");
-      setKingdoms(kingdomData ?? []);
+      const inspirationData = await getInspirations();
+      setInspirations(inspirationData);
+      const kingdomData = await getKingdoms();
+      setKingdoms(kingdomData);
     }
     loadData();
   }, []);
@@ -29,7 +30,8 @@ export default function CharacterModal(props: Modal<Character>) {
       ...f,
       inspiration: f.inspiration?.id,
       homeland: f.homeland?.id,
-      residence: f.residence?.id
+      residence: f.residence?.id,
+      timestamp: new Date().toISOString()
     })); }}>
       <FormField label="Name *">
         <input type="text" required value={form.name} onChange={(e) => handleChange("name", e.target.value)} />

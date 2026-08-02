@@ -4,17 +4,18 @@ import { Kingdom } from "@/types/KingdomType";
 import { Deity } from "@/types/DeityType";
 import { useModalForm } from "@/hooks/useModalForm";
 import FormField from "./FormField";
+import { getPantheon } from "@/lib/clientQueries";
 
 export default function KingdomModal(props: Modal<Kingdom>) {
 
   const { title, form, setForm, setBookData, closeModal } = props;
-  const { supabase, handleChange, handleSubmit } = useModalForm("kingdoms", form, setForm, setBookData, closeModal);
+  const { handleChange, handleSubmit } = useModalForm("kingdoms", form, setForm, setBookData, closeModal);
   const [deities, setDeities] = useState<Deity[]>([]);
 
   useEffect(() => {
     async function loadData() {
-      const { data } = await supabase.from("pantheon").select().order("epithet");
-      setDeities(data ?? []);
+      const data = await getPantheon();
+      setDeities(data);
     }
     loadData();
   }, []);
@@ -22,7 +23,8 @@ export default function KingdomModal(props: Modal<Kingdom>) {
   return (
     <form id={`${title.toLowerCase()}Form`} onSubmit={(e) => { e.preventDefault(); handleSubmit(f => ({
       ...f,
-      deity: f.deity?.id
+      deity: f.deity?.id,
+      timestamp: new Date().toISOString()
     })); }}>
       <FormField label="Name *">
         <input type="text" required value={form.name} onChange={(e) => handleChange("name", e.target.value)} />
