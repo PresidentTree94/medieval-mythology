@@ -20,12 +20,21 @@ export default async function CharacterDetail({ params }: { params: { slug: stri
 
   const family: { label: string; value: Character }[] = [];
   characters.forEach(c => {
+    const fatherMatch = character?.father && c.father.includes(character.father);
+    const motherMatch = character?.mother && c.mother.includes(character.mother);
+    
     // Parents
     if (character?.father && c.name.includes(character.father)) family.push({ label: "Father", value: c });
     if (character?.mother && c.name.includes(character.mother)) family.push({ label: "Mother", value: c });
 
     // Siblings
-    if ((character?.father && c.father.includes(character.father)) || (character?.mother && c.mother.includes(character.mother))) family.push({ label: "Sibling", value: c });
+    if (fatherMatch && motherMatch) {
+      if (c.gender === "Male") family.push({ label: "Brother", value: c });
+      if (c.gender === "Female") family.push({ label: "Sister", value: c });
+    } else if (fatherMatch || motherMatch) {
+      if (c.gender === "Male") family.push({ label: "Half-Brother", value: c });
+      if (c.gender === "Female") family.push({ label: "Half-Sister", value: c });
+    }
   });
 
   return (
@@ -39,7 +48,8 @@ export default async function CharacterDetail({ params }: { params: { slug: stri
           </div>
           <div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl text-card">{character?.name}</h1>
-            <span className="text-xl italic text-background-dark mt-3 mb-6 block">Inspired by {character?.inspiration?.name} of {character?.inspiration?.homeland.split(" ")[0]}</span>
+            <p className="text-background-light mt-1 mb-3 text-sm">({character.pronunciation})</p>
+            <span className="text-xl italic text-background-dark mb-6 block">Inspired by {character?.inspiration?.name} of {character?.inspiration?.homeland.split(" ")[0]}</span>
             <Decor className="w-40" icon="ri-quill-pen-line" />
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10">
               {stats.map((stat, index) => (
