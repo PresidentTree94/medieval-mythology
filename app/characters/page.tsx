@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Hero from "@/components/Hero";
 import Decor from "@/components/Decor";
 import { getCharacters, getKingdoms } from "@/lib/clientQueries";
@@ -70,7 +71,7 @@ export default function Characters() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredCharacters.map(c => (
-              <div key={c.id} className="card group">
+              <Link key={c.id} href={`/characters/${c.id}`} className="card group">
                 <div className="relative aspect-4/5 overflow-hidden flex flex-col justify-between">
                   <Image src="/royal.jpg" alt={c.name} fill sizes="100%" />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground-dark/70 to-transparent"></div>
@@ -85,7 +86,7 @@ export default function Characters() {
                   </div>
                 </div>
                 <div className="p-6"></div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

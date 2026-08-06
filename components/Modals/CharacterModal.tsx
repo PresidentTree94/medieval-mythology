@@ -84,6 +84,14 @@ export default function CharacterModal(props: Modal<Character>) {
           </select>
         </FormField>
       </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <FormField label="Father">
+          <input type="text" value={form.father} onChange={(e) => handleChange("father", e.target.value)} />
+        </FormField>
+        <FormField label="Mother">
+          <input type="text" value={form.mother} onChange={(e) => handleChange("mother", e.target.value)} />
+        </FormField>
+      </div>
     </form>
   );
 }

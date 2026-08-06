@@ -11,4 +11,6 @@ export type Character = {
   inspiration: Inspiration | null;
   homeland: Kingdom | null;
   residence: Kingdom | null;
+  mother: string;
+  father: string;
 }

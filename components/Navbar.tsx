@@ -39,7 +39,7 @@ export default function Navbar() {
             <Link key={key} href={`/${n.title.toLowerCase()}`} className={`px-4 py-2 ${pathname === `/${n.title.toLowerCase()}` ? isActive ? "text-[oklch(0.34_0.140_25)]" : "text-[oklch(0.84_0.115_84)]" : isActive ? "text-foreground-light" : "text-background-light"} ${isActive ? "hover:text-[oklch(0.34_0.140_25)]" : "hover:text-[oklch(0.84_0.115_84)]"} transition-colors duration-500`} onClick={() => setOpen(false)}>{n.title}</Link>
           ))}
         </nav>
-        <Link href="/archive" className={`${open ? "block" : "hidden lg:block"} px-5 py-2.5 rounded-md bg-[oklch(0.50_0.170_25)] hover:bg-[oklch(0.42_0.160_25)] transition-colors text-card text-xs tracking-[0.3em] uppercase mx-4 mb-4 lg:m-0 text-center`}>Enter the Archive</Link>
+        <Link href="/archive" className={`${open ? "block" : "hidden lg:block"} px-5 py-2.5 rounded-md bg-[oklch(0.50_0.170_25)] hover:bg-[oklch(0.42_0.160_25)] transition-colors text-card text-xs tracking-[0.3em] uppercase mx-4 mb-4 lg:m-0 text-center`} onClick={() => setOpen(false)}>Enter the Archive</Link>
       </div>
     </header>
   );
