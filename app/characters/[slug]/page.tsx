@@ -22,6 +22,8 @@ export default async function CharacterDetail({ params }: { params: { slug: stri
   characters.forEach(c => {
     const fatherMatch = character?.father && c.father.includes(character.father);
     const motherMatch = character?.mother && c.mother.includes(character.mother);
+    const childMatchFather = c.father && character?.name.includes(c.father);
+    const childMatchMother = c.mother && character?.name.includes(c.mother);
     
     // Parents
     if (character?.father && c.name.includes(character.father)) family.push({ label: "Father", value: c });
@@ -34,6 +36,15 @@ export default async function CharacterDetail({ params }: { params: { slug: stri
     } else if (fatherMatch || motherMatch) {
       if (c.gender === "Male") family.push({ label: "Half-Brother", value: c });
       if (c.gender === "Female") family.push({ label: "Half-Sister", value: c });
+    }
+
+    // Children
+    if (childMatchFather && childMatchMother) {
+      if (c.gender === "Male") family.push({ label: "Son", value: c });
+      if (c.gender === "Female") family.push({ label: "Daughter", value: c });
+    } else if (childMatchFather || childMatchMother) {
+      if (c.gender === "Male") family.push({ label: "Step-Son", value: c });
+      if (c.gender === "Female") family.push({ label: "Step-Daughter", value: c });
     }
   });
 
