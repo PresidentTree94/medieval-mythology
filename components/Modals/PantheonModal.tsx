@@ -41,7 +41,7 @@ export default function PantheonModal(props: Modal<Deity>) {
         </FormField>
       </div>
       <FormField label="Domains">
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           <input type="text" value={domainInput} onChange={(e) => setDomainInput(e.target.value)} />
           <button type="button" className="px-4 py-2.5 text-xs rounded-md bg-[oklch(0.52_0.090_55)] hover:bg-[oklch(0.44_0.082_55)] text-card uppercase font-display tracking-widest transition-colors cursor-pointer" onClick={addDomain}>Add</button>
         </div>

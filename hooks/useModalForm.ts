@@ -33,5 +33,5 @@ export function useModalForm<T extends { id: number }>(
     closeModal();
   }
 
-  return { handleChange, handleSubmit };
+  return { supabase, handleChange, handleSubmit };
 }

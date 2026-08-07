@@ -3,27 +3,85 @@ import { Modal } from "@/types/ModalType";
 import { Character } from "@/types/CharacterType";
 import { Inspiration } from "@/types/InspirationType";
 import { Kingdom } from "@/types/KingdomType";
+import { Social } from "@/types/SocialType";
 import { markersRecord } from "@/utils/markersRecord";
 import { useModalForm } from "@/hooks/useModalForm";
 import FormField from "./FormField";
-import { getInspirations, getKingdoms } from "@/lib/clientQueries";
+import { getCharacters, getInspirations, getKingdoms, getRelationships } from "@/lib/clientQueries";
+import { sortCharacters } from "@/utils/sortCharacters";
 
 export default function CharacterModal(props: Modal<Character>) {
 
   const { title, form, setForm, setBookData, closeModal } = props;
-  const { handleChange, handleSubmit } = useModalForm("characters", form, setForm, setBookData, closeModal);
+  const { supabase, handleChange, handleSubmit } = useModalForm("characters", form, setForm, setBookData, closeModal);
+  const [characters, setCharacters] = useState<Character[]>([]);
   const [inspirations, setInspirations] = useState<Inspiration[]>([]);
   const [kingdoms, setKingdoms] = useState<Kingdom[]>([]);
+  const [relationships, setRelationships] = useState<Social[]>([]);
+  const [relationshipCharacterId, setRelationshipCharacterId] = useState<number | null>(null);
+  const [relationshipType, setRelationshipType] = useState<string>("");
 
   useEffect(() => {
     async function loadData() {
+      const characterData = await getCharacters();
+      const sortedCharacters = sortCharacters(characterData ?? []);
+      const index = sortedCharacters.findIndex(c => c.id === Number(form.id));
+      sortedCharacters.splice(index, 1);
+      setCharacters(sortedCharacters);
       const inspirationData = await getInspirations();
       setInspirations(inspirationData);
       const kingdomData = await getKingdoms();
       setKingdoms(kingdomData);
+      if (form.id) {
+        const relationshipData = await getRelationships();
+        setRelationships(relationshipData);
+      }
     }
     loadData();
-  }, []);
+  }, [form.id]);
+
+  async function addRelationship() {
+    const bCharacter = characters.find(c => c.id === relationshipCharacterId);
+    if (bCharacter && relationshipType) {
+      const { data, error } = await supabase.from("relationships").insert({
+        aCharacter: form.id,
+        bCharacter: bCharacter.id,
+        relationship: relationshipType
+      }).select();
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      if (data && data.length > 0) {
+        setRelationships(prev => [...prev, {
+          aCharacter: form,
+          bCharacter: bCharacter,
+          relationship: relationshipType
+        }]);
+        setRelationshipCharacterId(null);
+        setRelationshipType("");
+      }
+    }
+  }
+
+  async function removeRelationship(index: number) {
+    const { error } = await supabase.from("relationships").delete().or(
+      `and(aCharacter.eq.${form.id},bCharacter.eq.${index}),and(aCharacter.eq.${index},bCharacter.eq.${form.id})`
+    );
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    setRelationships(prev => prev.filter(r => {
+      const a = r.aCharacter.id;
+      const b = r.bCharacter.id;
+      return !((a === form.id && b === index) || (a === index && b === form.id));
+    }))
+  }
 
   return (
     <form id={`${title.toLowerCase()}Form`} onSubmit={(e) => { e.preventDefault(); handleSubmit(f => ({
@@ -92,6 +150,35 @@ export default function CharacterModal(props: Modal<Character>) {
           <input type="text" value={form.mother} onChange={(e) => handleChange("mother", e.target.value)} />
         </FormField>
       </div>
+      {form.id && (
+        <FormField label="Social Relationships">
+          <div className="flex flex-col sm:flex-row gap-4">
+            <select value={relationshipCharacterId ?? ""} onChange={(e) => setRelationshipCharacterId(Number(e.target.value))}>
+              <option value="">Select a character...</option>
+              {characters.map(c => (
+                <option key={c.id} value={c.id}>{c.name}</option>
+              ))}
+            </select>
+            <select value={relationshipType} onChange={(e) => setRelationshipType(e.target.value)}>
+              <option value="">Select a relationship...</option>
+              <option value="Spouse">Spouse</option>
+              <option value="Lover">Lover</option>
+            </select>
+            <button type="button" className="px-4 py-2.5 text-xs rounded-md bg-[oklch(0.52_0.090_55)] hover:bg-[oklch(0.44_0.082_55)] text-card uppercase font-display tracking-widest transition-colors cursor-pointer" onClick={addRelationship}>Add</button>
+          </div>
+          <div className="mt-2 flex flex-wrap gap-2 text-xs">
+            {relationships.map(r => {
+              const index = r.aCharacter.id === form.id ? r.bCharacter.id : r.aCharacter.id;
+              return (
+                <span key={index} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[oklch(0.92_0.028_55)] text-[oklch(0.28_0.055_55)]">
+                  {r.aCharacter.id === form.id ? r.bCharacter.name.split(" ")[0] : r.aCharacter.name.split(" ")[0]} - {r.relationship}
+                  <i className="ri-close-line" onClick={() => removeRelationship(index)}></i>
+                </span>
+              );
+            })}
+          </div>
+        </FormField>
+      )}
     </form>
   );
 }

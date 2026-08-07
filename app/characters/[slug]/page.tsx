@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import Decor from "@/components/Decor";
-import { getCharacters } from "@/lib/serverQueries";
-import { Character } from "@/types/CharacterType";
+import { getCharacters, getRelationships} from "@/lib/serverQueries";
+import { buildFamily } from "@/utils/buildFamily";
 
 export default async function CharacterDetail({ params }: { params: { slug: string } }) {
 
   const { slug } = await params;
   const characters = await getCharacters({ orderBy: "name", ascending: true });
+  const relationships = await getRelationships();
   const index = characters.findIndex(c => c.id === Number(slug));
   const character = characters.splice(index, 1)[0];
 
@@ -18,35 +19,7 @@ export default async function CharacterDetail({ params }: { params: { slug: stri
     { label: "Residence", value: character?.residence?.name }
   ];
 
-  const family: { label: string; value: Character }[] = [];
-  characters.forEach(c => {
-    const fatherMatch = character?.father && c.father.includes(character.father);
-    const motherMatch = character?.mother && c.mother.includes(character.mother);
-    const childMatchFather = c.father && character?.name.includes(c.father);
-    const childMatchMother = c.mother && character?.name.includes(c.mother);
-    
-    // Parents
-    if (character?.father && c.name.includes(character.father)) family.push({ label: "Father", value: c });
-    if (character?.mother && c.name.includes(character.mother)) family.push({ label: "Mother", value: c });
-
-    // Siblings
-    if (fatherMatch && motherMatch) {
-      if (c.gender === "Male") family.push({ label: "Brother", value: c });
-      if (c.gender === "Female") family.push({ label: "Sister", value: c });
-    } else if (fatherMatch || motherMatch) {
-      if (c.gender === "Male") family.push({ label: "Half-Brother", value: c });
-      if (c.gender === "Female") family.push({ label: "Half-Sister", value: c });
-    }
-
-    // Children
-    if (childMatchFather && childMatchMother) {
-      if (c.gender === "Male") family.push({ label: "Son", value: c });
-      if (c.gender === "Female") family.push({ label: "Daughter", value: c });
-    } else if (childMatchFather || childMatchMother) {
-      if (c.gender === "Male") family.push({ label: "Step-Son", value: c });
-      if (c.gender === "Female") family.push({ label: "Step-Daughter", value: c });
-    }
-  });
+  const family = buildFamily(character, characters, relationships);
 
   return (
     <main>

@@ -3,6 +3,7 @@ import { Character } from "@/types/CharacterType";
 import { Inspiration } from "@/types/InspirationType";
 import { Kingdom } from "@/types/KingdomType";
 import { Deity } from "@/types/DeityType";
+import { Social } from "@/types/SocialType";
 
 export async function getCharacters(): Promise<Character[]> {
   const supabase = createClient();
@@ -41,8 +42,20 @@ export async function getKingdoms(): Promise<Kingdom[]> {
 }
 
 export async function getPantheon(): Promise<Deity[]> {
-  const supabase = await createClient();
+  const supabase = createClient();
   const { data, error } = await supabase.from("pantheon").select("*").order("epithet");
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
+export async function getRelationships(): Promise<Social[]> {
+  const supabase = createClient();
+  const { data, error } = await supabase.from("relationships").select("*, aCharacter:characters!relationships_aCharacter_fkey (id, name, gender),bCharacter:characters!relationships_bCharacter_fkey (id, name, gender)");
 
   if (error) {
     console.error(error);
