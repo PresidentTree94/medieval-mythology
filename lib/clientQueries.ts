@@ -53,9 +53,9 @@ export async function getPantheon(): Promise<Deity[]> {
   return data;
 }
 
-export async function getRelationships(): Promise<Social[]> {
+export async function getRelationshipsById(id: number): Promise<Social[]> {
   const supabase = createClient();
-  const { data, error } = await supabase.from("relationships").select("*, aCharacter:characters!relationships_aCharacter_fkey (id, name, gender),bCharacter:characters!relationships_bCharacter_fkey (id, name, gender)");
+  const { data, error } = await supabase.from("relationships").select("*, aCharacter:characters!relationships_aCharacter_fkey (id, name),bCharacter:characters!relationships_bCharacter_fkey (id, name)").or(`aCharacter.eq.${id},bCharacter.eq.${id}`);
 
   if (error) {
     console.error(error);

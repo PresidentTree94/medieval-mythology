@@ -7,7 +7,7 @@ import { Social } from "@/types/SocialType";
 import { markersRecord } from "@/utils/markersRecord";
 import { useModalForm } from "@/hooks/useModalForm";
 import FormField from "./FormField";
-import { getCharacters, getInspirations, getKingdoms, getRelationships } from "@/lib/clientQueries";
+import { getCharacters, getInspirations, getKingdoms, getRelationshipsById } from "@/lib/clientQueries";
 import { sortCharacters } from "@/utils/sortCharacters";
 
 export default function CharacterModal(props: Modal<Character>) {
@@ -33,7 +33,7 @@ export default function CharacterModal(props: Modal<Character>) {
       const kingdomData = await getKingdoms();
       setKingdoms(kingdomData);
       if (form.id) {
-        const relationshipData = await getRelationships();
+        const relationshipData = await getRelationshipsById(form.id);
         setRelationships(relationshipData);
       }
     }
@@ -167,10 +167,10 @@ export default function CharacterModal(props: Modal<Character>) {
             <button type="button" className="px-4 py-2.5 text-xs rounded-md bg-[oklch(0.52_0.090_55)] hover:bg-[oklch(0.44_0.082_55)] text-card uppercase font-display tracking-widest transition-colors cursor-pointer" onClick={addRelationship}>Add</button>
           </div>
           <div className="mt-2 flex flex-wrap gap-2 text-xs">
-            {relationships.map(r => {
+            {relationships.map((r, i) => {
               const index = r.aCharacter.id === form.id ? r.bCharacter.id : r.aCharacter.id;
               return (
-                <span key={index} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[oklch(0.92_0.028_55)] text-[oklch(0.28_0.055_55)]">
+                <span key={i} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[oklch(0.92_0.028_55)] text-[oklch(0.28_0.055_55)]">
                   {r.aCharacter.id === form.id ? r.bCharacter.name.split(" ")[0] : r.aCharacter.name.split(" ")[0]} - {r.relationship}
                   <i className="ri-close-line" onClick={() => removeRelationship(index)}></i>
                 </span>

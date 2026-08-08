@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Decor from "@/components/Decor";
-import { getCharacters, getRelationships} from "@/lib/serverQueries";
+import { getCharacters, getRelationships } from "@/lib/serverQueries";
 import { buildFamily } from "@/utils/buildFamily";
 
 export default async function CharacterDetail({ params }: { params: { slug: string } }) {
