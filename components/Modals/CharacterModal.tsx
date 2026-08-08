@@ -8,7 +8,7 @@ import { markersRecord } from "@/utils/markersRecord";
 import { useModalForm } from "@/hooks/useModalForm";
 import FormField from "./FormField";
 import { getCharacters, getInspirations, getKingdoms, getRelationshipsById } from "@/lib/clientQueries";
-import { sortCharacters } from "@/utils/sortCharacters";
+import { compareNames } from "@/utils/compareNames";
 
 export default function CharacterModal(props: Modal<Character>) {
 
@@ -24,7 +24,7 @@ export default function CharacterModal(props: Modal<Character>) {
   useEffect(() => {
     async function loadData() {
       const characterData = await getCharacters();
-      const sortedCharacters = sortCharacters(characterData ?? []);
+      const sortedCharacters = characterData.sort((a, b) => compareNames(a.name, b.name));
       const index = sortedCharacters.findIndex(c => c.id === Number(form.id));
       sortedCharacters.splice(index, 1);
       setCharacters(sortedCharacters);

@@ -8,13 +8,13 @@ import { Inspiration } from "@/types/InspirationType";
 import { Kingdom } from "@/types/KingdomType";
 import { Deity } from "@/types/DeityType";
 import { Myth } from "@/types/MythType";
-import { sortCharacters } from "@/utils/sortCharacters";
+import { compareNames } from "@/utils/compareNames";
 import * as sb from "@/lib/serverQueries";
 
 export default async function Archive() {
 
   const characterData = await sb.getCharacters();
-  const sortedCharacters = sortCharacters(characterData ?? []);
+  const sortedCharacters = characterData.sort((a, b) => compareNames(a.name, b.name));
   const usedInspirationIds = new Set(sortedCharacters.filter(c => c.inspiration?.id).map(c => c.inspiration?.id));
   const inspirationData = await sb.getInspirations();
   const kingdomData = await sb.getKingdoms({ orderBy: "name", ascending: true });

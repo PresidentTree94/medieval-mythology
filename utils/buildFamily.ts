@@ -1,5 +1,6 @@
 import { Character } from "@/types/CharacterType";
 import { Social } from "@/types/SocialType";
+import { compareNames } from "./compareNames";
 
 export function buildFamily(
   character: Character, characters: Character[], relationships: Social[]
@@ -7,10 +8,14 @@ export function buildFamily(
 
   const family: { label: string; value: Character }[] = [];
 
+  function pushLabel(relative: Character, maleLabel: string, femaleLabel: string) {
+    family.push({ label: relative.gender === "Male" ? maleLabel : femaleLabel, value: relative });
+  }
+
   characters.forEach(c => {
     // Parents
     if (character.father === c.name || character.mother === c.name) {
-      family.push({ label: c.gender === "Male" ? "Father" : "Mother", value: c });
+      pushLabel(c, "Father", "Mother");
       const union = relationships.find(r => (r.aCharacter.id === c.id || r.bCharacter.id === c.id) && r.relationship === "Spouse");
       if (union) {
         const partner = union.aCharacter.id === c.id ? union.bCharacter : union.aCharacter;
@@ -19,18 +24,10 @@ export function buildFamily(
       }
     }
 
-    // Siblings
-    if (character.name === c.father || character.name === c.mother) {
-      if (c.gender === "Male") family.push({ label: "Son", value: c });
-      if (c.gender === "Female") family.push({ label: "Daughter", value: c });
-    }
-    if ((c.father && character.father === c.father) && (c.mother && character.mother === c.mother)) {
-      if (c.gender === "Male") family.push({ label: "Brother", value: c });
-      if (c.gender === "Female") family.push({ label: "Sister", value: c });
-    } else if ((c.father && character.father === c.father) || (c.mother && character.mother === c.mother)) {
-      if (c.gender === "Male") family.push({ label: "Half-brother", value: c });
-      if (c.gender === "Female") family.push({ label: "Half-sister", value: c });
-    }
+    // Biological children
+    if (character.name === c.father || character.name === c.mother) pushLabel(c, "Son", "Daughter");
+    if ((c.father && character.father === c.father) && (c.mother && character.mother === c.mother)) pushLabel(c, "Brother", "Sister");
+    else if ((c.father && character.father === c.father) || (c.mother && character.mother === c.mother)) pushLabel(c, "Half-brother", "Half-sister");
   });
 
   relationships.filter(r => r.aCharacter.id === character.id || r.bCharacter.id === character.id).forEach(r => {
@@ -42,14 +39,14 @@ export function buildFamily(
 
         // Step-children through the husband
         const children = characters.filter(c => c.father === spouse.name && c.mother !== character.name);
-        children.forEach(c => family.push({ label: c.gender === "Male" ? "Step-son" : "Step-daughter", value: c }));
+        children.forEach(c => pushLabel(c, "Step-son", "Step-daughter"));
       }
       if (spouse.gender === "Female") {
         family.push({ label: "Wife", value: spouse });
 
         //Step-children through the wife
         const children = characters.filter(c => c.mother === spouse.name && c.father !== character.name);
-        children.forEach(c => family.push({ label: c.gender === "Male" ? "Step-son" : "Step-daughter", value: c }));
+        children.forEach(c => pushLabel(c, "Step-son", "Step-daughter"));
       }
     }
 
@@ -57,19 +54,5 @@ export function buildFamily(
     if (r.relationship === "Lover") family.push({ label: "Lover", value: r.aCharacter.id === character.id ? r.bCharacter : r.aCharacter });
   });
 
-  return family.sort((a, b) => {
-    const partsA = a.value.name.trim().toLowerCase().split(" ");
-    const partsB = b.value.name.trim().toLowerCase().split(" ");
-
-    const lastA = partsA[partsA.length - 1];
-    const lastB = partsB[partsB.length - 1];
-
-    const lastCompare = lastA.localeCompare(lastB);
-    if (lastCompare !== 0) return lastCompare;
-
-    const firstA = partsA[0];
-    const firstB = partsB[0];
-
-    return firstA.localeCompare(firstB);
-  });
+  return family.sort((a, b) => compareNames(a.value.name, b.value.name));
 }

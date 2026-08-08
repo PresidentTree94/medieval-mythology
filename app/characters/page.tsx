@@ -7,7 +7,7 @@ import Decor from "@/components/Decor";
 import { getCharacters, getKingdoms } from "@/lib/clientQueries";
 import { Character } from "@/types/CharacterType";
 import { Kingdom } from "@/types/KingdomType";
-import { sortCharacters } from "@/utils/sortCharacters";
+import { compareNames } from "@/utils/compareNames";
 import { markersRecord } from "@/utils/markersRecord";
 import FormField from "@/components/Modals/FormField";
 import { useForm } from "@presidenttree94/form-utils";
@@ -20,7 +20,7 @@ export default function Characters() {
   useEffect(() => {
     async function loadData() {
       const charactersData = await getCharacters();
-      const sortedCharacters = sortCharacters(charactersData);
+      const sortedCharacters = charactersData.sort((a, b) => compareNames(a.name, b.name));
       setCharacters(sortedCharacters);
       const kingdomsData = await getKingdoms();
       setKingdoms(kingdomsData);
