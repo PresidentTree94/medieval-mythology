@@ -2,11 +2,16 @@ import { Character } from "@/types/CharacterType";
 import { Social } from "@/types/SocialType";
 import { compareNames } from "./compareNames";
 
+type Relative = {
+  label: string;
+  value: Character;
+}
+
 export function buildFamily(
   character: Character, characters: Character[], relationships: Social[]
-): { label: string; value: Character }[] {
+): Relative[] {
 
-  const family: { label: string; value: Character }[] = [];
+  const family: Relative[] = [];
 
   function pushLabel(relative: Character, maleLabel: string, femaleLabel: string) {
     family.push({ label: relative.gender === "Male" ? maleLabel : femaleLabel, value: relative });

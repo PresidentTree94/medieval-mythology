@@ -86,6 +86,7 @@ export default function CharacterModal(props: Modal<Character>) {
   return (
     <form id={`${title.toLowerCase()}Form`} onSubmit={(e) => { e.preventDefault(); handleSubmit(f => ({
       ...f,
+      name: f.name.trim(),
       inspiration: f.inspiration?.id,
       homeland: f.homeland?.id,
       residence: f.residence?.id,
