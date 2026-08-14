@@ -14,7 +14,13 @@ export function buildFamily(
   const family: Relative[] = [];
 
   function pushLabel(relative: Character, maleLabel: string, femaleLabel: string) {
-    family.push({ label: relative.gender === "Male" ? maleLabel : femaleLabel, value: relative });
+    const label = relative.gender === "Male" ? maleLabel : femaleLabel;
+    const exists = family.some(f => f.value.id === relative.id);
+    if (!exists) family.push({ label, value: relative });
+  }
+
+  function findSpouse(partner: Character) {
+    return relationships.find(r => (r.aCharacter.id === partner.id || r.bCharacter.id === partner.id) && r.relationship === "Spouse");
   }
 
   characters.forEach(c => {
@@ -23,7 +29,7 @@ export function buildFamily(
       pushLabel(c, "Father", "Mother");
 
       // Step-parents
-      const union = relationships.find(r => (r.aCharacter.id === c.id || r.bCharacter.id === c.id) && r.relationship === "Spouse");
+      const union = findSpouse(c);
       if (union) {
         const partner = union.aCharacter.id === c.id ? union.bCharacter : union.aCharacter;
         if (partner.gender === "Male" && character.father !== partner.name) family.push({ label: "Step-father", value: partner });
@@ -31,8 +37,12 @@ export function buildFamily(
       }
 
       // Aunts and uncles
-      const parentSiblings = characters.filter(p => ((c.father && p.father === c.father) || (c.mother && p.mother === c.mother)) && p.name !== c.name);
-      parentSiblings.forEach(s => pushLabel(s, "Uncle", "Aunt"));
+      const parentSiblings = characters.filter(p => ((p.father && p.father === c.father) || (p.mother && p.mother === c.mother)) && p.name !== c.name);
+      parentSiblings.forEach(s => {
+        pushLabel(s, "Uncle", "Aunt");
+        const spouse = findSpouse(s);
+        if (spouse) pushLabel(spouse.aCharacter.id === s.id ? spouse.bCharacter : spouse.aCharacter, "Uncle", "Aunt");
+      });
     }
 
     // Biological children
