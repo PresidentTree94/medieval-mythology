@@ -21,18 +21,28 @@ export function buildFamily(
     // Parents
     if (character.father === c.name || character.mother === c.name) {
       pushLabel(c, "Father", "Mother");
+
+      // Step-parents
       const union = relationships.find(r => (r.aCharacter.id === c.id || r.bCharacter.id === c.id) && r.relationship === "Spouse");
       if (union) {
         const partner = union.aCharacter.id === c.id ? union.bCharacter : union.aCharacter;
         if (partner.gender === "Male" && character.father !== partner.name) family.push({ label: "Step-father", value: partner });
         if (partner.gender === "Female" && character.mother !== partner.name) family.push({ label: "Step-mother", value: partner });
       }
+
+      // Aunts and uncles
+      const parentSiblings = characters.filter(p => ((c.father && p.father === c.father) || (c.mother && p.mother === c.mother)) && p.name !== c.name);
+      parentSiblings.forEach(s => pushLabel(s, "Uncle", "Aunt"));
     }
 
     // Biological children
     if (character.name === c.father || character.name === c.mother) pushLabel(c, "Son", "Daughter");
-    if ((c.father && character.father === c.father) && (c.mother && character.mother === c.mother)) pushLabel(c, "Brother", "Sister");
-    else if ((c.father && character.father === c.father) || (c.mother && character.mother === c.mother)) pushLabel(c, "Half-brother", "Half-sister");
+    if ((c.father && character.father === c.father) || (c.mother && character.mother === c.mother)) {
+      if ((c.father && character.father === c.father) && (c.mother && character.mother === c.mother)) pushLabel(c, "Brother", "Sister");
+      else pushLabel(c, "Half-brother", "Half-sister");
+      const niecesNephews = characters.filter(n => n.father === c.name || n.mother === c.name);
+      niecesNephews.forEach(n => pushLabel(n, "Nephew", "Niece"));
+    }
   });
 
   relationships.filter(r => r.aCharacter.id === character.id || r.bCharacter.id === character.id).forEach(r => {
