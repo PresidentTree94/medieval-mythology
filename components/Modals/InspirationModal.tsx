@@ -16,7 +16,8 @@ export default function InspirationModal(props: Modal<Inspiration>) {
       meaning: f.meaning,
       role: f.role,
       homeland: f.homeland,
-      markers: f.markers
+      markers: f.markers,
+      status: f.status
     })); }}>
       <FormField label="Name *">
         <input type="text" required value={form.name} onChange={(e) => handleChange("name", e.target.value)} />
@@ -24,9 +25,17 @@ export default function InspirationModal(props: Modal<Inspiration>) {
       <FormField label="Meaning">
         <input type="text" value={form.meaning} onChange={(e) => handleChange("meaning", e.target.value)} />
       </FormField>
-      <FormField label="Role">
-        <input type="text" value={form.role} onChange={(e) => handleChange("role", e.target.value)} />
-      </FormField>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <FormField label="Role">
+          <input type="text" value={form.role} onChange={(e) => handleChange("role", e.target.value)} />
+        </FormField>
+        <FormField label="Status">
+          <select value={form.status ? "TRUE" : "FALSE"} onChange={(e) => handleChange("status", e.target.value === "TRUE")}>
+            <option value="TRUE">Show</option>
+            <option value="FALSE">Hide</option>
+          </select>
+        </FormField>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <FormField label="Homeland">
           <input type="text" value={form.homeland} onChange={(e) => handleChange("homeland", e.target.value)} />

@@ -31,7 +31,7 @@ export default async function Pantheon() {
                   </div>
                   <span className="inline-block text-xs uppercase font-display tracking-[0.25em] text-[oklch(0.78_0.140_82)]">{d.rank}</span>
                   <h3 className="text-card text-xl mt-2 mb-1">{d.epithet}</h3>
-                  <p className="text-sm italic text-border">Bestower of...</p>
+                  <p className="text-sm italic text-border">Inspired by {d.inspiration}</p>
                   <div className="flex flex-wrap gap-1.5 justify-center font-display uppercase tracking-widest text-xs mt-4">
                     {d.domains.map((o, index) => (
                       <span key={index} className="px-2 py-0.5 rounded-full bg-[oklch(0.72_0.150_80)]/15 text-[oklch(0.84_0.115_84)]">{o}</span>

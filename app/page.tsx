@@ -65,11 +65,11 @@ export default async function Home() {
       >
         <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8">
           {characters.slice(0, 3).map(c => (
-            <div key={c.id} className="card group">
-              <div className="relative aspect-4/5 overflow-hidden flex items-start">
+            <Link key={c.id} href={`/characters/${c.id}`} className="card group">
+              <div className="relative aspect-4/5 overflow-hidden flex items-start justify-end">
                 <Image src="/royal.jpg" alt={c.name} fill sizes="100%" />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground-dark/70 to-transparent"></div>
-                <div className="relative p-4 self-end flex flex-wrap gap-2 text-card">
+                <div className="relative p-4 flex flex-wrap gap-2 text-card">
                   {c.markers.map((m, index) => (
                     <i key={index} className={markersRecord[m]}></i>
                   ))}
@@ -79,7 +79,7 @@ export default async function Home() {
                 <h3 className="text-xl text-foreground-dark">{c.name}</h3>
                 <span className="text-foreground-light text-sm italic">Inspired by {c.inspiration?.name} of {c.inspiration?.homeland.split(" ")[0]}</span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </LeftSection>

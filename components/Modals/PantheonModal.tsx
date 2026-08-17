@@ -54,9 +54,14 @@ export default function PantheonModal(props: Modal<Deity>) {
           ))}
         </div>
       </FormField>
-      <FormField label="Blessing">
-        <input type="text" value={form.blessing} onChange={(e) => handleChange("blessing", e.target.value)}/>
-      </FormField>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <FormField label="Inspiration">
+          <input type="text" value={form.inspiration} onChange={(e) => handleChange("inspiration", e.target.value)} />
+        </FormField>
+        <FormField label="Blessing">
+          <input type="text" value={form.blessing} onChange={(e) => handleChange("blessing", e.target.value)} />
+        </FormField>
+      </div>
       <FormField label="Description">
         <input type="text" value={form.description} onChange={(e) => handleChange("description", e.target.value)} />
       </FormField>

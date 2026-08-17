@@ -5,4 +5,5 @@ export type Inspiration = {
   role: string;
   homeland: string;
   markers: string[];
+  status: boolean;
 }

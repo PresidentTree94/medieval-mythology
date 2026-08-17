@@ -38,6 +38,8 @@ export default function CharacterModal(props: Modal<Character>) {
       }
     }
     loadData();
+    setRelationshipCharacterId(null);
+    setRelationshipType("");
   }, [form.id]);
 
   async function addRelationship() {
@@ -167,7 +169,7 @@ export default function CharacterModal(props: Modal<Character>) {
             </select>
             <button type="button" className="px-4 py-2.5 text-xs rounded-md bg-[oklch(0.52_0.090_55)] hover:bg-[oklch(0.44_0.082_55)] text-card uppercase font-display tracking-widest transition-colors cursor-pointer" onClick={addRelationship}>Add</button>
           </div>
-          <div className="mt-2 flex flex-wrap gap-2 text-xs">
+          <div className="mt-2.5 flex flex-wrap gap-2 text-xs">
             {relationships.map((r, i) => {
               const index = r.aCharacter.id === form.id ? r.bCharacter.id : r.aCharacter.id;
               return (
