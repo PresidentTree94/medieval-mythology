@@ -11,6 +11,10 @@
   --font-body: var(--font-cormorant-garamond);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-body);
 }

@@ -5,7 +5,6 @@ import Hero from "@/components/Hero";
 import Decor from "@/components/Decor";
 import CenterSection from "@/components/CenterSection";
 import LeftSection from "@/components/LeftSection";
-import InfoBlock from "@/components/InfoBlock";
 import { markersRecord } from "@/utils/markersRecord";
 import * as sb from "@/lib/serverQueries";
 
@@ -122,7 +121,7 @@ export default async function Home() {
                 </div>
                 <p className="text-xs tracking-widest uppercase font-display text-[oklch(0.78_0.140_82)]">{p.rank}</p>
                 <h3 className="text-xl text-card">{p.epithet}</h3>
-                <span className="text-sm italic inline-block text-border">Bestower of...</span>
+                <span className="text-sm italic inline-block text-border">Inspired by {p.inspiration}</span>
               </div>
             ))}
           </div>
@@ -139,12 +138,18 @@ export default async function Home() {
         nav={navs["myths"].title}
       >
         <div className="mt-14 grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="card group">
-            <div className="relative h-56 overflow-hidden">
-              <Image src="/loom.jpg" alt="Loom" fill sizes="100%" />
+          {myths.slice(0, 3).map(m => (
+            <div key={m.id} className="card group">
+              <div className="relative h-56 overflow-hidden">
+                <Image src="/loom.jpg" alt="Loom" fill sizes="100%" />
+              </div>
+              <div className="p-6 space-y-2">
+                <h3 className="text-xl text-foreground-dark">{m.title}</h3>
+                <span className="text-sm italic inline-block text-foreground-light">{m.source}</span>
+                <p className="mt-1 text-sm text-foreground-light line-clamp-2">{m.summary}</p>
+              </div>
             </div>
-            <InfoBlock />
-          </div>
+          ))}
         </div>
       </LeftSection>
       {/*---QUOTES---*/}

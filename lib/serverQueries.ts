@@ -5,6 +5,7 @@ import { Kingdom } from "@/types/KingdomType";
 import { Deity } from "@/types/DeityType";
 import { Myth } from "@/types/MythType";
 import { Social } from "@/types/SocialType";
+import { MythInsp } from "@/types/MythInspType";
 
 export async function getCharacters({ orderBy = "timestamp", ascending = false } = {}): Promise<Character[]> {
   const supabase = await createClient();
@@ -69,6 +70,18 @@ export async function getMyths({ orderBy = "timestamp", ascending = false } = {}
 export async function getRelationships(): Promise<Social[]> {
   const supabase = await createClient();
   const { data, error } = await supabase.from("relationships").select("*, aCharacter:characters!relationships_aCharacter_fkey (id, name, gender),bCharacter:characters!relationships_bCharacter_fkey (id, name, gender)");
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
+export async function getMythInspirations(): Promise<MythInsp[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("mythInsp").select("*, inspiration:inspirations (id, name, role)");
 
   if (error) {
     console.error(error);

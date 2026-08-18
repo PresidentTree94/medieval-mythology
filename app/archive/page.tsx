@@ -51,7 +51,7 @@ export default async function Archive() {
       } as Inspiration
     },
     kingdoms: {
-      headings: ["Name", "Crest", "Government"],
+      headings: ["Name", "Crest", "Medieval", "Mythology"],
       data: (kingdomData ?? []) as Kingdom[],
       empty: {
         name: "",
