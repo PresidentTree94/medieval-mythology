@@ -42,6 +42,16 @@ export default function CharacterModal(props: Modal<Character>) {
     setRelationshipType("");
   }, [form.id]);
 
+
+  async function updateStatus() {
+    const { error } = await supabase.from("inspirations").update({ "status": true }).eq("id", form.inspiration?.id);
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+  }
+
   async function addRelationship() {
     const bCharacter = characters.find(c => c.id === relationshipCharacterId);
     if (bCharacter && relationshipType) {
@@ -93,7 +103,7 @@ export default function CharacterModal(props: Modal<Character>) {
       homeland: f.homeland?.id,
       residence: f.residence?.id,
       timestamp: new Date().toISOString()
-    })); }}>
+    })); updateStatus(); }}>
       <FormField label="Name *">
         <input type="text" required value={form.name} onChange={(e) => handleChange("name", e.target.value)} />
       </FormField>
