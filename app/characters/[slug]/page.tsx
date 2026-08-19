@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import Decor from "@/components/Decor";
-import { getCharacters, getRelationships } from "@/lib/serverQueries";
+import { getCharacters, getRelationships, getMythInspirationsByInspiration } from "@/lib/serverQueries";
 import { buildFamily } from "@/utils/buildFamily";
+import KingdomComp from "@/components/KingdomComp";
+import { markersRecord } from "@/utils/markersRecord";
 
 export default async function CharacterDetail({ params }: { params: { slug: string } }) {
 
@@ -11,6 +13,7 @@ export default async function CharacterDetail({ params }: { params: { slug: stri
   const relationships = await getRelationships();
   const index = characters.findIndex(c => c.id === Number(slug));
   const character = characters.splice(index, 1)[0];
+  const myths = await getMythInspirationsByInspiration(character.inspiration?.id ?? 0);
 
   const stats = [
     { label: "Role", value: "" },
@@ -32,7 +35,12 @@ export default async function CharacterDetail({ params }: { params: { slug: stri
           </div>
           <div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl text-card">{character?.name}</h1>
-            <p className="text-background-light mt-1 mb-3 text-sm">({character.pronunciation})</p>
+            <p className="text-background-light mt-1 text-sm">({character.pronunciation})</p>
+            <div className="flex flex-wrap justify-center gap-2 text-card my-3">
+              {character.markers.map((m, index) => (
+                <i key={index} className={`${markersRecord[m]}`}></i>
+              ))}
+            </div>
             <span className="text-xl italic text-background-dark mb-6 block">Inspired by {character?.inspiration?.name} of {character?.inspiration?.homeland.split(" ")[0]}</span>
             <Decor className="w-40" icon="ri-quill-pen-line" />
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10">
@@ -66,6 +74,38 @@ export default async function CharacterDetail({ params }: { params: { slug: stri
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+      <section className="bg-card">
+        <div>
+          <div className="bg-background-light p-8 md:p-12 border border-[oklch(0.62_0.14_78)]/40 rounded-lg">
+            <div className="topper">
+              <span>Marginalia</span>
+              <h2 className="text-2xl md:text-3xl mt-2 mb-4">The Roots of this Figure</h2>
+              <Decor className="w-40 !mx-0" icon="ri-quill-pen-line" />
+              <p className="max-w-3xl mt-5 mb-10">This character is a inspired by {character.inspiration?.name} of {character.inspiration?.homeland.split(" ")[0]}, a {character.inspiration?.role}. Below are the myths they are featured in and how they contribute to each one.</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {myths.map(m => {
+                return (
+                  <div key={m.myth.id} className="bg-card p-6 rounded-lg border border-border/70">
+                    <h3 className="text-xs tracking-[0.35em] uppercase text-[oklch(0.34_0.14_25)]">{m.myth.title}</h3>
+                    <p className="text-sm md:text-base text-foreground-light mt-1.5">{m.activities}</p>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="bg-background-dark">
+        <div className="space-y-8">
+          {character.homeland && (
+            <KingdomComp index={0} data={character.homeland} subtitle="Homeland" />
+          )}
+          {(character.residence && character.homeland?.id !== character.residence.id) && (
+            <KingdomComp index={1} data={character.residence} subtitle="Residence" />
+          )}
         </div>
       </section>
     </main>

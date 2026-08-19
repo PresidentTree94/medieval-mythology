@@ -1,7 +1,8 @@
 import { Inspiration } from "./InspirationType";
+import { Myth } from "./MythType";
 
 export type MythInsp = {
   inspiration: Inspiration;
-  myth: number;
+  myth: Myth;
   activities: string;
 }

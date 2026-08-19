@@ -9,7 +9,7 @@ import { MythInsp } from "@/types/MythInspType";
 
 export async function getCharacters({ orderBy = "timestamp", ascending = false } = {}): Promise<Character[]> {
   const supabase = await createClient();
-  const { data, error } = await supabase.from("characters").select("*, inspiration:inspirations (id, name, homeland), homeland:kingdoms!characters_homeland_fkey (id, name), residence:kingdoms!characters_residence_fkey (id, name)").order(orderBy, { ascending });
+  const { data, error } = await supabase.from("characters").select("*, inspiration:inspirations (id, name, homeland, role), homeland:kingdoms!characters_homeland_fkey (*), residence:kingdoms!characters_residence_fkey (*)").order(orderBy, { ascending });
 
   if (error) {
     console.error(error);
@@ -82,6 +82,18 @@ export async function getRelationships(): Promise<Social[]> {
 export async function getMythInspirations(): Promise<MythInsp[]> {
   const supabase = await createClient();
   const { data, error } = await supabase.from("mythInsp").select("*, inspiration:inspirations (id, name, role)");
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
+export async function getMythInspirationsByInspiration(id: number): Promise<MythInsp[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("mythInsp").select("*, myth:myths (id, title)").eq("inspiration", id);
 
   if (error) {
     console.error(error);

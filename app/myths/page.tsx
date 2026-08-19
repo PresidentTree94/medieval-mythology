@@ -19,7 +19,7 @@ export default async function Myths() {
       <article>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 md:grid-cols-2 gap-8">
           {myths.map(m => {
-            const inspirations = mythInspirations.filter(i => i.myth === m.id);
+            const inspirations = mythInspirations.filter(i => i.myth === m.id).map(i => i.inspiration.name).sort((a, b) => a.localeCompare(b));
             return (
             <div key={m.id} className="card group">
               <div className="relative h-56 overflow-hidden flex items-end">
@@ -33,8 +33,8 @@ export default async function Myths() {
               <div className="p-6 space-y-4">
                 <p className="text-sm text-foreground-light line-clamp-2">{m.summary}</p>
                 <div className="flex flex-wrap gap-2 text-xs uppercase tracking-widest font-display">
-                  {inspirations.map(i => (
-                    <span className="bg-[oklch(0.95_0.045_88)] text-[oklch(0.4_0.1_72)] px-3 py-1 rounded-full inline-block">{i.inspiration.name}</span>
+                  {inspirations.map((i, index) => (
+                    <span key={index} className="bg-[oklch(0.95_0.045_88)] text-[oklch(0.4_0.1_72)] px-3 py-1 rounded-full inline-block">{i}</span>
                   ))}
                 </div>
               </div>
