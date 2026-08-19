@@ -19,7 +19,7 @@ export default async function Myths() {
       <article>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 md:grid-cols-2 gap-8">
           {myths.map(m => {
-            const inspirations = mythInspirations.filter(i => i.myth === m.id).map(i => i.inspiration.name).sort((a, b) => a.localeCompare(b));
+            const inspirations = mythInspirations.filter(i => i.myth.id === m.id).map(i => i.inspiration.name).sort((a, b) => a.localeCompare(b));
             return (
             <div key={m.id} className="card group">
               <div className="relative h-56 overflow-hidden flex items-end">
