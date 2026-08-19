@@ -81,7 +81,7 @@ export async function getRelationships(): Promise<Social[]> {
 
 export async function getMythInspirations(): Promise<MythInsp[]> {
   const supabase = await createClient();
-  const { data, error } = await supabase.from("mythInsp").select("*, inspiration:inspirations (id, name, role)");
+  const { data, error } = await supabase.from("mythInsp").select("*, inspiration:inspirations (id, name, role), myth:myths (id)");
 
   if (error) {
     console.error(error);
