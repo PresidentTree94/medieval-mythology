@@ -113,7 +113,7 @@ export default function MythModal(props: Modal<Myth>) {
         </div>
         <button type="button" className="mt-2.5 px-4 py-2.5 text-xs rounded-md bg-[oklch(0.52_0.090_55)] hover:bg-[oklch(0.44_0.082_55)] text-card uppercase font-display tracking-widest transition-colors cursor-pointer" onClick={addInspiration}>Add Participant</button>
         <div className="pt-2.5 space-y-2.5">
-          {mythInspirations.map((m, index) => (
+          {mythInspirations.sort((a, b) => a.inspiration.name.localeCompare(b.inspiration.name)).map((m, index) => (
             <div key={index} className="border border-border/70 p-3 rounded-md">
               <div className="flex justify-between items-start">
                 <h3 className="text-sm text-foreground-dark">{m.inspiration.name}</h3>
