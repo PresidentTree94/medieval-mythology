@@ -39,7 +39,11 @@ export default function MythModal(props: Modal<Myth>) {
         activities: activities
       }).select();
 
-      const { error: inspError } = await supabase.from("inspirations").update({ role: inspirationInput.role, status: inspirationInput.status }).eq("id", inspirationInput.id);
+      const { error: inspError } = await supabase.from("inspirations").update({
+        name: inspirationInput.name,
+        role: inspirationInput.role,
+        status: inspirationInput.status
+      }).eq("id", inspirationInput.id);
 
       if (mythError) {
         console.error(mythError);
