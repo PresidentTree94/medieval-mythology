@@ -6,6 +6,7 @@ import FormField from "./FormField";
 import { Inspiration } from "@/types/InspirationType";
 import { MythInsp } from "@/types/MythInspType";
 import { getInspirations, getMythInspirationsByMythId } from "@/lib/clientQueries";
+import CreatableSelect from "react-select/creatable";
 
 export default function MythModal(props: Modal<Myth>) {
 
@@ -38,7 +39,7 @@ export default function MythModal(props: Modal<Myth>) {
         activities: activities
       }).select();
 
-      const { error: inspError } = await supabase.from("inspirations").update({ status: inspirationInput.status }).eq("id", inspirationInput.id);
+      const { error: inspError } = await supabase.from("inspirations").update({ role: inspirationInput.role, status: inspirationInput.status }).eq("id", inspirationInput.id);
 
       if (mythError) {
         console.error(mythError);
@@ -85,6 +86,17 @@ export default function MythModal(props: Modal<Myth>) {
     setMythInspirations(prev => prev.filter(item => item.inspiration.id !== index));
   }
 
+  async function createInspiration(name: string) {
+    const { data, error } = await supabase.from("inspirations").insert({ name, status: false }).select();
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    if (data && data.length > 0) setInspirationInput(data[0]);
+  }
+
   return (
     <form id={`${title.toLowerCase()}Form`} onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
       <FormField label="Title *">
@@ -97,14 +109,22 @@ export default function MythModal(props: Modal<Myth>) {
         <textarea className="resize-none" rows={3} value={form.summary} onChange={(e) => handleChange("summary", e.target.value)}></textarea>
       </FormField>
       {form.id && (<FormField label="Participants">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <select value={inspirationInput?.id ?? ""} onChange={(e) => setInspirationInput(inspirations.find(i => i.id === Number(e.target.value)) ?? null)}>
-            <option value="">Select an inspiration...</option>
-            {inspirations.map(i => (
-              <option key={i.id} value={i.id}>{i.name}</option>
-            ))}
-          </select>
-          <input type="text" placeholder="Role of participant..." disabled value={inspirationInput?.role ?? ""} />
+        <div className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-4">
+          <CreatableSelect
+            placeholder="Select an inspiration..."
+            value={inspirationInput ? { value: inspirationInput.id, label: inspirationInput.name } : null }
+            options={inspirations.map(i => ({ value: i.id, label: i.name }))}
+            onChange={(option) => {
+              if (!option) {
+                setInspirationInput(null);
+                return;
+              }
+              const found = inspirations.find(i => i.id === option.value);
+              setInspirationInput(found ?? null);
+            }}
+            onCreateOption={(inputValue) => createInspiration(inputValue)}
+          />
+          <input type="text" placeholder="Role of participant..." value={inspirationInput?.role ?? ""} onChange={(e) => setInspirationInput(prev => prev ? { ...prev, role: e.target.value } : null)} />
           <select value={inspirationInput?.status ? "TRUE" : "FALSE"} onChange={(e) => setInspirationInput(prev => prev ? { ...prev, status: e.target.value === "TRUE" } : null)}>
             <option value="TRUE">Show</option>
             <option value="FALSE">Hide</option>
