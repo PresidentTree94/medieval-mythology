@@ -127,13 +127,14 @@ export default function MythModal(props: Modal<Myth>) {
               setInspirationInput(found ?? null);
             }}
             onCreateOption={(inputValue) => createInspiration(inputValue)}
+            classNames={{ placeholder: () => "text-sm" }}
           />
-          <input type="text" placeholder="Role of participant..." value={inspirationInput?.role ?? ""} onChange={(e) => setInspirationInput(prev => prev ? { ...prev, role: e.target.value } : null)} />
-          <select value={inspirationInput?.status ? "TRUE" : "FALSE"} onChange={(e) => setInspirationInput(prev => prev ? { ...prev, status: e.target.value === "TRUE" } : null)}>
+          <input type="text" placeholder="Role of participant..." value={inspirationInput?.role} onChange={(e) => setInspirationInput(prev => prev ? { ...prev, role: e.target.value } : null)} disabled={!inspirationInput} />
+          <select value={inspirationInput?.status ? "TRUE" : "FALSE"} onChange={(e) => setInspirationInput(prev => prev ? { ...prev, status: e.target.value === "TRUE" } : null)} disabled={!inspirationInput}>
             <option value="TRUE">Show</option>
             <option value="FALSE">Hide</option>
           </select>
-          <input type="text" placeholder="Activities of participant..." value={activities} onChange={(e) => setActivities(e.target.value)} className="col-span-full" />
+          <input type="text" placeholder="Activities of participant..." value={activities} onChange={(e) => setActivities(e.target.value)} className="col-span-full" disabled={!inspirationInput} />
         </div>
         <button type="button" className="mt-2.5 px-4 py-2.5 text-xs rounded-md bg-[oklch(0.52_0.090_55)] hover:bg-[oklch(0.44_0.082_55)] text-card uppercase font-display tracking-widest transition-colors cursor-pointer" onClick={addInspiration}>Add Participant</button>
         <div className="pt-2.5 space-y-2.5">
